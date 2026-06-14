@@ -1,0 +1,17 @@
+#!/bin/bash
+. /export/tools/xilinx/Vitis_HLS/2024.2/settings64.sh
+#. /export/tools/xilinx/Vivado/2018.3/settings64.sh
+#
+# vivado -mode gui 
+# vivado -mode tcl
+# vivado -mode batch -source Your_SCRIPT.tcl
+# link_design -part xc7s25csga324-1
+# link_design -part xc7s100fgga676-1
+# link_design -part xczu3eg-sfva625-1-e
+# --- trouble to part is not specified !!!
+# open_checkpoint $prj_out/_ROUTED.dcp
+#
+#cd /import/home/tsung/CODE/Virtex7_Vivado
+#rm -rf project_3
+vitis_hls & 
+
