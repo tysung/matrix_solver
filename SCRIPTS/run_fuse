@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+#. /export/tools/xilinx/12.2/ISE_DS/settings64.sh
+. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+#fuse -top TBX_top_level -lib "secureip" -lib "unimacro_ver" -lib "unisims_ver" -o "./BA_isim.exe" -prj "./BA.prj" 
+#
+#./BA_isim.exe -gui
+# - run isim with gui
+# it's not working for ISE 10.1 version
+#
+fuse -top testbench -lib "secureip" -lib "unimacro_ver" -lib "unisims_ver" -o "./testbench_isim_beh.exe" -prj "./testbench_beh.prj" 
+#
+./testbench_isim_beh.exe -gui
+#

@@ -1,0 +1,108 @@
+## Xcelium
+#GUI=-gui
+
+RTL_FILES = \
+		../rtl/parameters.svh \
+		../rtl/validready_buffers.svh \
+		../rtl/alu.sv \
+		../rtl/arbiter.v \
+		../rtl/automorphism_control.sv \
+		../rtl/axil_crossbar.v \
+		../rtl/axil_crossbar_addr.v \
+		../rtl/axil_crossbar_rd.v \
+		../rtl/axil_crossbar_wr.v \
+		../rtl/axil_crossbar_wrap_8.v \
+		../rtl/axil_register_rd.v \
+		../rtl/axil_register_wr.v \
+		../rtl/axi_to_data_memory.sv \
+		../rtl/axi_to_procwrite.sv \
+		../rtl/axi_to_simple.sv \
+		../rtl/blake0.sv \
+		../rtl/blake1.sv \
+		../rtl/blake10.sv \
+		../rtl/blake11.sv \
+		../rtl/blake2.sv \
+		../rtl/blake2xb.sv \
+		../rtl/blake2xb_dummy.sv \
+		../rtl/blake2xb_either.sv \
+		../rtl/blake2xb_wrapper.sv \
+		../rtl/blake3.sv \
+		../rtl/blake4.sv \
+		../rtl/blake5.sv \
+		../rtl/blake6.sv \
+		../rtl/blake7.sv \
+		../rtl/blake8.sv \
+		../rtl/blake9.sv \
+		../rtl/blocker.sv \
+		../rtl/BMM_MSBx_FW128.v \
+		../rtl/Brent_Kung_Adder_128_Lower_part.v \
+		../rtl/Brent_Kung_Adder_128_Upper_part.v \
+		../rtl/Cells.v \
+		../rtl/compare_gt_lt.sv \
+		../rtl/contract.sv \
+		../rtl/control.sv \
+		../rtl/control_alu.sv \
+		../rtl/control_registers.sv \
+		../rtl/crossbar.sv \
+		../rtl/crossbar_data.sv \
+		../rtl/CSA.v \
+		../rtl/data_memory.sv \
+		../rtl/double_frontend.sv \
+		../rtl/DW01_add.v \
+		../rtl/DW01_csa.v \
+		../rtl/DW02_mult.v \
+		../rtl/DW03_pipe_reg.v \
+		../rtl/DW_fifoctl_s1_df.v \
+		../rtl/DW_fifo_s1_df.v \
+		../rtl/DW_ram_r_w_s_dff.v \
+		../rtl/expand.sv \
+		../rtl/fifo.sv \
+		../rtl/IN12LP_R1DB_W00032B128M02S1_H.sv \
+		../rtl/IN12LP_R1DB_W00064B128M02S1_H.sv \
+		../rtl/IN12LP_S1DB_W00512B128M04S2_H.sv \
+		../rtl/IN12LP_S1DB_W08192B032M04S8_H.sv \
+		../rtl/IN12LP_S1DB_W08192B128M04S8_H.sv \
+		../rtl/IN12LP_S1DB_W32768B032M16S8_H.sv \
+		../rtl/input_queue_wrapper.sv \
+		../rtl/instruction_memory.sv \
+		../rtl/lane.sv \
+		../rtl/lane_chunk.sv \
+		../rtl/Modular_Addition_Substraction_pipeline.v \
+		../rtl/Modular_Addition_Substraction_pipeline_top.v \
+		../rtl/new_frontend.sv \
+		../rtl/output_queue_wrapper.sv \
+		../rtl/pipeline.sv \
+		../rtl/priority_encoder.v \
+		../rtl/queues_required.sv \
+		../rtl/queue_count_update.sv \
+		../rtl/queue_get_canconsume.sv \
+		../rtl/register.sv \
+		../rtl/register_file.sv \
+		../rtl/register_with_valid.sv \
+		../rtl/scalar_memory.sv \
+		../rtl/shift_register.sv \
+		../rtl/shuffle_control.sv \
+		../rtl/sram_one_port_instruction_memory1.sv \
+		../rtl/sram_one_port_instruction_memory2.sv \
+		../rtl/sram_one_port_mrf.sv \
+		../rtl/sram_one_port_sdm.sv \
+		../rtl/sram_one_port_srf.sv \
+		../rtl/sram_one_port_vdm.sv \
+		../rtl/sram_one_port_vrf_memory128x32.sv \
+		../rtl/syncer.sv \
+		../rtl/tile.sv \
+		../rtl/tile_body.sv \
+		../rtl/trigger_control.sv \
+		../rtl/vdm_chunk.sv 
+
+run:
+	xrun -64 -v93 ${GUI} -plinowarn -access r ../rtl/parameters.svh ../rtl/validready_buffers.svh multitile_tb.sv $(RTL_FILES) ${RESTORE}
+
+clean:
+	rm -rf simvision238069.diag
+	rm -rf waves.shm
+	rm -rf xcelium.d
+	rm -rf xrun.history
+	rm -rf xrun.key
+	rm -rf xrun.log
+	rm -rf results.data

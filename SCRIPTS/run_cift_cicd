@@ -1,0 +1,34 @@
+#!/usr/bin/bash -x
+#
+cd ~/CODE/cift-internal_082023
+#
+rm -rf build
+#
+mkdir build
+touch build/info.txt
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DTORC_ROOT=/opt/torc/latest -DNEXTPNR_ROOT=/opt/nextpnr-cift/q10-release ..
+make -j8 cift-build
+cd ..
+#
+#
+python3.9 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+pip install build/wheels/* 
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu
+export CIFT_SETTINGS_FILE=~/.config/cift/settings.toml
+#export CIFT_SETTINGS_FILE=test/qa/settings.toml
+#export CIFT_INSTALL_ROOT=/nas/home/tsung/CODE/cift-internal_082023
+#export CIFT_INSTALL_ROOT_TEST=${CI_PROJECT_DIR}
+#export CIFT_LOGGING_LEVEL=DEBUG
+python -V
+echo $PWD
+#
+#./cift-cli ./testgroups/intel/stratix10/build-tests-brams-script.py
+python3 -m cift.internal.cli ./testgroups/intel/stratix10/build-tests-brams-script.py
+#python3 -m cift.internal.cli ./testgroups/intel/stratix10/build-tests-labs-script.py
+#python3 -m cift.internal.cli ./testgroups/intel/stratix10/build-tests-harness-script.py
+#python3 -m cift.internal.cli ./testgroups/intel/stratix10/build-tests-wires-script.py
+#python3 -m cift.internal.cli ./testgroups/intel/stratix10/build-tests-pips-script.py
+

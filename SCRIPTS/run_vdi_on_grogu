@@ -1,0 +1,12 @@
+#!/usr/bin/bash -x
+#
+# lsblk - will find /dev/loop3 has no mounting point 
+# will mount on /mnt/vdi - CIFT installation data
+#
+cd /nas/home/tsung/CODE/Stratix10_Clock
+# 
+sudo vboximg-mount --root /mnt/vdi --image /nas/home/tsung/VIRTUALBOX/cift.vdi
+VBoxManage clonehd /nas/home/tsung/VIRTUALBOX/cift.vdi cift.raw --format RAW
+sudo losetup -fP cift.raw
+sudo mkdir /mnt/vdi
+sudo mount /dev/loop3 /mnt/vdi

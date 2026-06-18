@@ -1,0 +1,40 @@
+##!/usr/bin/bash -x
+#
+# compile with gcc version 9
+#
+#export CC=gcc-9
+#export CCX=g++-9
+#
+date
+cd /nas/home/tsung/CODE/cift-internal_052026
+rm -rf build
+mkdir -p build
+#touch build/info.txt
+cd build
+# /opt/torc/lattice, /opt/torc/ice40
+cmake -DCIFT_FAMILIES=altera,vivado -DCMAKE_C_COMPILER=/usr/bin/gcc-9 -DCMAKE_CXX_COMPILER=/usr/bin/g++-9 -DPYTHON_EXECUTABLE=/usr/bin/python3.9  -DCMAKE_BUILD_TYPE=Release -DTORC_ROOT=/opt/torc/latest -DEXCLUDE_ALTERA_ROUTING=1 ..
+#cmake -DCIFT_DEPLOY_MODE=1 -DCMAKE_BUILD_TYPE=Release ..
+make -j8 installer
+cd ..
+#
+exit
+#
+#rm -rf venv
+#python3.9 -m venv venv
+#source venv/bin/activate
+#pip install -r requirements.txt
+#pip install build/wheels/* 
+#
+#exit
+#
+export LM_LICENSE_FILE=2100@rcg-lic.ads.isi.edu:1727@rcg-lic.ads.isi.edu:3000@rcg-lic.ads.isi.edu
+export CIFT_SETTINGS_FILE=/nas/home/tsung/CODE/cift-internal_052026/.config/cift/settings.toml
+export CIFT_INSTALL_ROOT=~/CODE/cift-internal_052026
+export CIFT_LOGGING_LEVEL=DEBUG
+#
+source venv/bin/activate
+#
+python3.9 -m cift.internal.cli ./stratix10_cli.py
+#python3.9 -m cift.internal.cli ./tmp_series7_logic.py
+#
+

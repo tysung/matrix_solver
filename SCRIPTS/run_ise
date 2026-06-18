@@ -1,0 +1,28 @@
+#!/bin/bash -x
+#. /export/tools/xilinx/10.1/ISE_DS/settings64.sh
+. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+result="LUTS1_NG"
+#result="all-slices-xcv100efg256-6-2020-08-09T19-04-53"
+cift="/import/home/tsung/CODE/cift-internal"
+dir="${cift}/temp/${result}/1-ram256_1/build-00000"
+#
+cd ${dir}/slice
+xst -ifn ${dir}/slice/plb.xst
+#
+cd ..
+#
+xst -ifn ${dir}/harness.xst
+#
+ngdbuild -sd ${dir}/slice -sd ${dir} -uc ${cift}/interfaces/bscanv1/io_wrapper.ucf ${dir}/harness.ngd
+#
+map -w -u -logic_opt off -register_duplication off -o ${dir}/harness_placed.ncd ${dir}/harness.ngd 
+#
+par -w ${dir}/harness_placed.ncd ${dir}/harness.ncd ${dir}/harness_placed.pcf
+#
+xdl -ncd2xdl harness.ncd
+#
+xdl -xdl2ncd luts1-0.xdl 
+#
+bitgen -w -d -m -g ReadBack ${dir}/harness.ncd ${dir}/harness.bit ${dir}/harness_placed.pcf
+#

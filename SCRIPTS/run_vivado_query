@@ -1,0 +1,11 @@
+#!/bin/bash
+. /export/tools/xilinx/Vivado/2017.1/settings64.sh
+#
+# vivado -mode gui 
+# vivado -mode tcl
+# vivado -mode batch -source Your_SCRIPT.tcl
+# open_checkpoint $prj_out/_ROUTED.dcp
+#
+cd /import/home/tsung/CODE/sp7_cift-internal/code/main/ift/device_info
+#rm -rf project_3
+vivado -mode batch -source query_xc7s100fgga676-1.tcl -nojournal -notrace

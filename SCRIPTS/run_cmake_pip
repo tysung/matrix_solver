@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+cd build
+rm -rf *
+cmake -DCMAKE_BUILD_TYPE=Release ../code/plugins/intel-quartus-prime
+make -j4 plugin-quartus-full
+#
+cd ..
+#
+python -m pip install --upgrade pip && python -m pip install -r requirements.txt
+#
+# invoke python virtual env
+#
+. ./installations/cift/python/bin/activate
+#
+python -m pip uninstall cift-qprime-full -y 
+python -m pip install  ./plugins/cift_qprime_full-1.0-py3-none-any.whl
+python -m pip list
+

@@ -1,0 +1,9 @@
+#!/bin/bash -x
+#
+#export VCS_HOME=/export/tools/synopsys/L-2016.06-SP1
+#export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+export DVE_HOME=/export/tools/synopsys/vc_static/R-2020.12/vcs-mx
+export PATH=$DVE_HOME/bin:$PATH
+#
+dve -full64 &
+

@@ -1,0 +1,24 @@
+#!/bin/bash -x
+#
+# libraries - altera simulation library generated from quartus run
+# synopsys_sim.setup - vcs simulation setup file
+#
+cd /nas/home/tsung/Trebuchet/ROCKET_CHIP/rocket-chip
+export ROCKETCHIP=`pwd`
+#
+export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+#export VCS_HOME=/export/tools/synopsys/L-2016.06-SP1
+export PATH=$VCS_HOME/bin:$PATH
+#
+export RISCV=/nas/home/tsung/Trebuchet/CONDA-ENV/riscv-tools
+export PATH=/usr/bin:$RISCV/bin:$RISCV/../bin:$PATH
+#export VCS_CC=/usr/bin/g++
+#
+cd vsim
+make clean
+make |& tee LOG
+#
+#./simv -gui
+#./simv -ucli 
+#./simv +vcs+finish+100
+#

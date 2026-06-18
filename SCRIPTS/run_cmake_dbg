@@ -1,0 +1,2 @@
+#
+cmake --trace-source=torc/external/CMakeLists.txt --trace-expand -DCMAKE_BUILD_TYPE=Release ..

@@ -1,0 +1,66 @@
+#!/bin/bash -x
+#
+# libraries - altera simulation library generated from quartus run
+# synopsys_sim.setup - vcs simulation setup file
+#
+# Finally, I have successfully compile and run on "rancor" with "Q-2020.03"
+# 2. re-run again on "rancor" which link to proper object to fix the issue
+# 3. We can NOT run "dve" on host "rancor" for debug - DVE is not installed.
+#
+export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+#export VCS_HOME=/export/tools/synopsys/L-2016.06-SP1
+export PATH=$VCS_HOME/bin:$PATH
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu:2100@rcg-lic.ads.isi.edu:3000@rcg-lic.ads.isi.edu:2700@rcg-lic.ads.isi.edu:5280@rcg-lic.ads.isi.edu
+#
+rm -rf simv.daidir
+rm -rf libraries/vhdl_libs/work/*
+rm -rf libraries/vhdl_libs/ecp5u/*
+mkdir -p libraries/vhdl_libs/work/64
+mkdir -p libraries/vhdl_libs/ecp5u/64
+#export VCS_ARCH_OVERRIDE=amd64
+#export LD_LIBRARY_PATH=/usr/lib/x86_64-redhat-linux6E
+#
+REPO_DIR=/nas/home/tsung/CODE/cift-internal_112023
+WORKDIR=$REPO_DIR/workspace/work/ecp5_simulation
+LATTICE_SIMLIB=ecp5_simulation/src
+#WORKDIR=/nas/home/tsung/VCS_SIM_CIFT
+CIFT_PLUGINS=$REPO_DIR/venv/lib/python3.9/site-packages
+#
+# compile ecp5 lib based on "ecp5_simulation/mti/orc_cmpl.bat"
+#
+vhdlan -kdb -full64 -nc -work ecp5u $LATTICE_SIMLIB/ECP5UCOMP.vhd
+vhdlan -kdb -full64 -nc -work ecp5u $LATTICE_SIMLIB/ECP5U_SEQ.vhd
+vhdlan -kdb -full64 -nc -work ecp5u $LATTICE_SIMLIB/ECP5U_IO.vhd
+vhdlan -kdb -full64 -nc -nc -work ecp5u $LATTICE_SIMLIB/ECP5U_CMB.vhd
+vhdlan -kdb -full64 -nc -work ecp5u $LATTICE_SIMLIB/ECP5U_MEM.vhd
+vhdlan -kdb -full64 -nc -work ecp5u $LATTICE_SIMLIB/ECP5U_MISC.vhd
+vhdlan -kdb -full64 -nc -work ecp5u $LATTICE_SIMLIB/ECP5U_LUT.vhd
+vhdlan -kdb -full64 -nc -work ecp5u $LATTICE_SIMLIB/gsr_pur_assign.vhd
+#
+vlogan -kdb -full64 -nc -work ecp5u +v2k +define+mixed_hdl $LATTICE_SIMLIB/*.v
+vhdlan -kdb -full64 -nc -work ecp5u $LATTICE_SIMLIB/ECP5U_SL.vhd
+#vlogan -kdb -full64 -nc -work work +v2k +define+mixed_hdl $WORKDIR/DP16KD.v $WORKDIR/OSCG.v
+#
+vhdlan -kdb -full64 -work work \
+$WORKDIR/tdp_ram.vhd \
+$CIFT_PLUGINS/cift_lattice/ecp5/hdl/ebr_tpg_constants_pkg.vhd \
+$WORKDIR/dp_bram_facade.vhd \
+$WORKDIR/march_constants_pkg.vhd \
+$WORKDIR/march_generic_pkg.vhd \
+$CIFT_PLUGINS/cift/builders/bram/single_port/hdl/marchx_pkg.vhd \
+$WORKDIR/march_generic.vhd \
+$WORKDIR/generic_tpg_converter.vhd \
+$WORKDIR/sp2dp_converter.vhd \
+$CIFT_PLUGINS/cift/builders/bram/hdl/ora.vhd \
+$CIFT_PLUGINS/cift/builders/bram/hdl/capture.vhd \
+$WORKDIR/test_arch.vhd \
+$CIFT_PLUGINS/cift/builders/bram/hdl/harness.vhd \
+$REPO_DIR/interfaces/lattice/ecp5/led/eval-5g/io_wrapper_20MHz.vhd
+#
+vcs -kdb -full64 -debug_access+all -lca -t ps top_level
+#
+./simv -gui
+#./simv -ucli 
+#./simv +vcs+finish+100000000000
+#
+#vcs -sverilog -timescale=1ns/1ns -ntb_opts uvm-1.0+rvm +incdir+../sv xbus_tb_top.sv -l comp.log -debug_access+pp  +define+UVM_ON_TOP

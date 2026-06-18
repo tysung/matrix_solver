@@ -1,0 +1,58 @@
+#!/usr/bin/expect -f
+
+# Set timeout period
+set timeout -1
+
+# VM name
+set vm_name "vbox_2_rocky8"
+
+# User credentials
+set username "user"
+set password "user_password"
+
+# Set log file
+log_file -a expect_script.log
+
+# Start the VM in headless mode
+spawn VBoxManage startvm $vm_name --type headless
+
+# Wait for the VM to start
+expect {
+    "VM \"$vm_name\" has been successfully started." { }
+    timeout { puts "VM start timed out"; exit 1 }
+}
+
+# Delay to allow VM to fully boot (adjust as necessary)
+sleep 10 
+
+
+# SSH into the VM
+#spawn ssh -p 2222 $username@localhost "whoami; date;"
+spawn ssh -p 2222 $username@localhost
+
+# Handle SSH password prompt
+#    "yes/no" { send "yes\r"; exp_continue }
+expect {
+    "password:" { send "$password\r" }
+}
+
+# Interact allows the user to interact with the VM if needed
+#    timeout 60
+#    eof { puts "SSH session ended"; exit }
+#    -re "Connection to localhost closed." { puts "SSH session closed"; exit }
+interact {
+    eof { puts "SSH session ended" }
+    -re "Connection to localhost closed." { puts "SSH session closed"; exit }
+}
+
+spawn vboxmanage controlvm $vm_name poweroff  
+
+# Wait for the poweroff command to complete
+expect {
+    "poweroff" { puts "VM powered off successfully"; exit 0 }
+    timeout { puts "VM poweroff timed out"; exit 1 }
+}
+
+# Close log file
+log_file
+

@@ -1,0 +1,10 @@
+#!/bin/bash -x
+. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+cift="/nas/home/tsung/CODE/sp6_cift-internal"
+dir="${cift}/work/2021-09-08T11-46-15/1-xc6slx45csg484-3-intcnt-interconnect-region_area/build-00208"
+#
+#xdl -xdl2ncd interconnect-1-208.xdl
+#
+bitgen -w -d -g LCK_cycle:6 -g compress ${dir}/interconnect-1-208.ncd ${dir}/interconnect-1-208.bit
+#

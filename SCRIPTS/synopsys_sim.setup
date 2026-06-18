@@ -1,0 +1,12 @@
+
+WORK > DEFAULT
+DEFAULT:               ./libraries/vhdl_libs/work/                 
+work:                  ./libraries/vhdl_libs/work/                 
+altera:                ./libraries/vhdl_libs/altera/           
+lpm:                   ./libraries/vhdl_libs/lpm/              
+sgate:                 ./libraries/vhdl_libs/sgate/            
+altera_mf:             ./libraries/vhdl_libs/altera_mf/        
+altera_lnsim:          ./libraries/vhdl_libs/altera_lnsim/     
+FOURTEENNM:            ./libraries/vhdl_libs/fourteennm/
+FOURTEENNM_HSSI_ALL:   ./libraries/vhdl_libs/fourteennm_hssi_all/
+LIBRARY_SCAN = TRUE

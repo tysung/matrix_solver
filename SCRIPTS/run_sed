@@ -1,0 +1,8 @@
+#
+# find "filesystem" and stream edit to "experimental/filesystem" 
+#
+#find . -name "*pp" -print -exec sed -i 's/<filesystem>/<experimental\/filesystem>/' {} \;
+find . -name "*pp" -print -exec sed -i 's/::filesystem/::experimental::filesystem/g' {} \;
+#find . -name "*DigestStream.hpp" -print 
+#
+#

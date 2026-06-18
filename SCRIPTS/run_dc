@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+export PATH=$PATH:/export/tools/synopsys/O-2018.06-SP4/bin
+#
+#
+dc_shell -f bram_dc.tcl
+#
+#dc_shell -gui 
+

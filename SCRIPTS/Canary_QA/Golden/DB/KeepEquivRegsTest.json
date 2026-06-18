@@ -1,0 +1,77 @@
+{
+    "X_date": [
+        "01-28-2021",
+        "01-07-2021",
+        "01-06-2021",
+        "01-08-2021",
+        "01-15-2021"
+    ],
+    "Y_name": [
+        "directInferredTest()",
+        "OnTruePositiveTest()",
+        "OffTrueNegativeTest()",
+        "hierarchyOffTest()",
+        "OffTruePositiveTest()",
+        "OnTrueNegativeTest()",
+        "hierarchyOnTest()",
+        "directTest()"
+    ],
+    "Cells": {
+        "OffTrueNegativeTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        },
+        "OffTruePositiveTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        },
+        "OnTrueNegativeTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        },
+        "OnTruePositiveTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        },
+        "directInferredTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        },
+        "directTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        },
+        "hierarchyOffTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        },
+        "hierarchyOnTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        }
+    }
+}

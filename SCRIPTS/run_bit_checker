@@ -1,0 +1,12 @@
+#!/bin/bash -x
+#
+cd ~/FASM2BELS/prjxray
+#
+./utils/sp6_bitstream_analyzer.py --bitstream cicd-test/luts1-s6.bit |& tee cicd-test/s6_luts1.bit_analyzer
+#
+cd ~/CODE/torc-internal/Build
+rm cicd-test
+ln -s ~/FASM2BELS/cicd-test .
+#
+./bin/BitstreamExample cicd-test/luts1-s6.bit | tee luts1-s6_bin.txt
+cp luts1-s6_bin.txt ~/FASM2BELS/cicd-test/

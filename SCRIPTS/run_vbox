@@ -1,0 +1,5 @@
+#!/bin/bash -x
+#
+virtualbox &
+#virtualbox --startvm Lattice &
+

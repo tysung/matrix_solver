@@ -1,0 +1,38 @@
+#!/usr/bin/bash -x
+#
+#cd ~/Trebuchet
+#git clone https://rcg.isi.edu/dprive/trebuchet/trebuchet-ip.git
+cd ~/Trebuchet/trebuchet-ip
+# ------
+rm -rf ../trebenv
+/opt/rh/rh-python38/root/usr/bin/python -m venv ../trebenv # Use python3.8
+source ../trebenv/bin/activate
+python --version
+pip install -e .
+pip list
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu:2100@rcg-lic.ads.isi.edu:3000@rcg-lic.ads.isi.edu:2700@rcg-lic.ads.isi.edu:5280@rcg-lic.ads.isi.edu:5480@rancor.ads.isi.edu
+export COCOTB_LOG_LEVEL=warning
+#
+# ----------
+#source ../trebenv/bin/activate
+python --version
+export SIM=xcelium
+export PATH=$PATH:/projects/tools/cadence/installs/XCELIUM2109/tools/bin
+source /opt/rh/devtoolset-7/enable
+python -m pytest -n 8 .
+#
+# ----------
+#source ../trebenv/bin/activate
+python --version
+echo $PATH
+export PATH=$PATH:/projects/tools/cadence/installs/XCELIUM2109/tools/bin
+echo $PATH
+export SIM=xcelium
+###---      generate RTL
+python cores/tile/tile_gen.py --sim --params cores/params/design_params_widemedium.json --output tile_rtl_widemedium_sim
+python cores/tile/tile_gen.py --sim --params cores/params/design_params_4rpm.json --output tile_rtl_sim
+###---        kernel tests
+python cores/kernels/run_kernel.py -i cores/kernels/ntt_loops_kernel_n_4096_chunksize_16.json -o cores/kernels/ntt_loops_kernel_n_4096_chunksize_16_expected.json -d tile_rtl_widemedium_sim
+python cores/kernels/run_kernel.py -i cores/kernels/ntt_unrolled_kernel_n_4096_chunksize_16.json -o cores/kernels/ntt_unrolled_kernel_n_4096_chunksize_16_expected.json -d tile_rtl_widemedium_sim
+# ------
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+export LM_LICENSE_FILE=7788@rcg-lic.ads.isi.edu
+#
+/opt/lattice/diamond/3.12/bin/lin64/diamond &
+

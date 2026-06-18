@@ -1,0 +1,22 @@
+#!/usr/bin/bash -x
+#
+cd /home/tsung/CODE/cift-internal_112025
+#
+#source /opt/cift/python/bin/activate
+source /opt/cift/cift-activate 
+#pip install -r run-requirements.txt
+#pip install -r test-requirements.txt
+pip freeze
+#
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu:3000@rcg-lic.ads.isi.edu
+export CIFT_SETTINGS_FILE=/home/user/.config/cift/settings.toml
+export CIFT_INSTALL_ROOT_TEST=/home/tsung/CODE/cift-internal_112025
+export CIFT_LOGGING_LEVEL=DEBUG
+#
+#python3.9 -m xmlrunner -o=reports discover -s code/plugins/altera/base/test/python 
+#
+#python3.9 -m cift.internal.cli ./agilex7_bram.py
+#
+#/opt/cift/cift-cli ./agilex7_bram.py
+#
+python -m cift.internal.cli ./a7_a006r16a2e1v.p

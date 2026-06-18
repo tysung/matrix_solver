@@ -1,0 +1,62 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____
+//  /   /\/   /
+// /___/  \  /    Vendor: Xilinx
+// \   \   \/     Version: P.20131013
+//  \   \         Application: netgen
+//  /   /         Timestamp: Mon Nov 30 15:35:37 2020
+// /___/   /\     
+// \   \  /  \ 
+//  \___\/\___\
+//             
+// Command: -w -aka -sim -ofmt verilog -intstyle ise -mhf -pcf harness_placed.pcf -tb -mhf harness.ncd 
+// Design Name: top_level
+//             
+// Purpose:    
+//     Xilinx TestFixture Template produced by program netgen P.20131013
+//             
+//     ATTENTION: This file was created by netgen and may therefore be 
+//     overwritten by subsequent runs of netgen. Xilinx recommends that you 
+//     copy this file to a new name, or 'paste' this text into another file, 
+//     to avoid accidental loss of data.
+//             
+////////////////////////////////////////////////////////////////////////////////
+
+`include "/import/projects/FPGA_tools/tools/linux/xilinx/14.7/ISE_DS/ISE/verilog/src/glbl.v"
+`timescale 1 ns/1 ps
+
+  module TBX_top_level;
+    reg clkin_P;
+    reg clkin_N;
+    top_level uut (
+      .clkin_P (clkin_P),
+      .clkin_N (clkin_N)
+    );
+    initial begin
+      clkin_P = 1'b0;
+      clkin_N = 1'b1;
+      $display("           T cc");
+      $display("           i ll");
+      $display("           m kk");
+      $display("           e ii");
+      $display("             nn");
+      $display("             __");
+      $display("             PN");
+      $monitor("%t",$realtime,,clkin_P,clkin_N);
+    end
+
+    always begin
+       #25 clkin_P = ~clkin_P; 
+       clkin_N = ~clkin_N;
+    end
+
+    initial begin
+    #1000 $stop;
+    $display($time, " << Starting the Simulation >>");
+    //
+    // #1000 $finish;
+
+  end
+endmodule

@@ -1,0 +1,5 @@
+#!/bin/bash -x
+#make -B VERBOSE=1 -f torc/CMakeFiles/torc.dir/build.make torc/CMakeFiles/torc.dir/src/torc/placer/PlacerHelpers.cpp.o
+#
+cd /import/home/tsung/IFT_QA/today/cift-internal/build/torc
+/usr/bin/c++   -I/import/home/tsung/IFT_QA/today/cift-internal/torc/include -I/import/home/tsung/IFT_QA/today/cift-internal/torc/src -I/import/home/tsung/IFT_QA/today/cift-internal/torc/external -I/import/home/tsung/IFT_QA/today/cift-internal/torc/external/zlib -I/import/home/tsung/IFT_QA/today/cift-internal/build/torc/external/zlib -I/import/home/tsung/IFT_QA/today/cift-internal/torc/external/md5 -isystem /usr/local/boost/boost-1.66.0/include -isystem /import/home/tsung/IFT_QA/today/cift-internal/build/torc/external/yosys-prefix/src/yosys  -O3 -DNDEBUG   -std=gnu++1z -o CMakeFiles/torc.dir/src/torc/placer/PlacerHelpers.cpp.o -c /import/home/tsung/IFT_QA/today/cift-internal/torc/src/torc/placer/PlacerHelpers.cpp

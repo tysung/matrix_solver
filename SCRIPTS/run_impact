@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+export LD_PRELOAD=/opt/usb-driver/libusb-driver.so
+#
+#. /opt/xilinx/10.1/ISE/settings64.sh
+. /opt/xilinx/14.7/LabTools/settings64.sh
+#. /nas/projects/FPGA_tools/tools/linux/xilinx/14.7/ISE_DS/settings64.sh
+#. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+#impact -batch 
+impact  &
+#
+#impact -batch <<EOF
+#setMode -bs
+#setCable -p usb21
+#Identify
+#EOF 
+#
+#identifyMPM
+#assignFile -p 1,5 -file "/import/home/tsung/BOARD/today/cift-internal/RESULT_ORIG/virtex5/interconnect-4cdc1a57ac38/interconnect-0.bit"
+#Program -p 1
+#bsdebug -reset -scanir {self.board.user_reg} -scandr {BSCAN_DR}
+#bsdebug -reset -scanir 1111111111111111111111111111111111111111111111111111000010 -scandr 0x0000
+#verify -p {self.board.position}
+#verify -p 1,5 
+

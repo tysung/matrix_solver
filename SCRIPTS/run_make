@@ -1,0 +1,6 @@
+#!/bin/bash -x
+#make VERBOSE=1 torc_static
+#make -f CMakeFiles/Makefile2 torc_static
+#make -f CMakeFiles/Makefile2 torc/CMakeFiles/torc_static.dir/all
+make VERBOSE=1 -f torc/CMakeFiles/torc.dir/build.make torc/CMakeFiles/torc.dir/build
+

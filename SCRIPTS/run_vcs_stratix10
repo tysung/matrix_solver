@@ -1,0 +1,115 @@
+#!/bin/bash -x
+#
+# libraries - altera simulation library generated from quartus run
+# synopsys_sim.setup - vcs simulation setup file
+#
+# Finally, I have successfully compile and run on "yoda" with "21.4" on Ubuntu platform
+# VCS - /export/tools/synopsys/vcs/Q-2020.03
+# Verdi - /export/tools/synopsys/vc_static/R-2020.12/verdi
+# License - 3000@rcg-lic.ads.isi.edu
+#
+#export QUARTUS_INSTALL_DIR=/media/sf_quartus_21.4/quartus
+export QUARTUS_INSTALL_DIR=/opt/intel/quartus/21.4/quartus
+#
+export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+#export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+#export VCS_HOME=/export/tools/synopsys/L-2016.06-SP1
+#export VCS_HOME=/media/sf_vc_static/R-2020.12/vcs-mx
+export VERDI_HOME=/export/tools/synopsys/vc_static/R-2020.12/verdi
+#export VERDI_HOME=/media/sf_vc_static/R-2020.12/verdi
+export PATH=$VCS_HOME/bin:$QUARTUS_INSTALL_DIR/bin:$PATH
+#export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu:2100@rcg-lic.ads.isi.edu:3000@rcg-lic.ads.isi.edu:2700@rcg-lic.ads.isi.edu:5280@rcg-lic.ads.isi.edu
+export LM_LICENSE_FILE=3000@rcg-lic.ads.isi.edu
+#
+WORKDIR=/nas/home/tsung/VCS_STRATIX10_NEW
+LIBDIR=$WORKDIR/libraries
+FILESDIR=$WORKDIR/files
+#LIBDIR=$WORKDIR/libraries_vbox_verdi_Q
+#
+# compile verdi flag
+DBG=-kdb
+#
+#
+rm -rf simv.daidir
+rm -rf libraries/vhdl_libs/altera/*
+rm -rf libraries/vhdl_libs/lpm/*
+rm -rf libraries/vhdl_libs/sgate/*
+rm -rf libraries/vhdl_libs/altera_mf/*
+rm -rf libraries/vhdl_libs/altera_lnsim/*
+rm -rf libraries/vhdl_libs/fourteennm/*
+#
+mkdir -p libraries/vhdl_libs/altera/64
+mkdir -p libraries/vhdl_libs/lpm/64
+mkdir -p libraries/vhdl_libs/sgate/64
+mkdir -p libraries/vhdl_libs/altera_mf/64
+mkdir -p libraries/vhdl_libs/altera_lnsim/64
+mkdir -p libraries/vhdl_libs/fourteennm/64
+#
+#export VCS_ARCH_OVERRIDE=amd64
+#export LD_LIBRARY_PATH=/usr/lib/x86_64-redhat-linux6E
+#
+
+#
+# compile stratix10 lib based on "ecp5_simulation/mti/orc_cmpl.bat"
+#
+vhdlan $DBG -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_syn_attributes.vhd 
+vhdlan $DBG -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_standard_functions.vhd 
+vhdlan $DBG -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/alt_dspbuilder_package.vhd 
+vhdlan $DBG -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_europa_support_lib.vhd 
+vhdlan $DBG -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives_components.vhd 
+vhdlan $DBG -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives.vhd
+#
+vhdlan $DBG -full64 -nc -work lpm $QUARTUS_INSTALL_DIR/eda/sim_lib/220pack.vhd 
+vhdlan $DBG -full64 -nc -work lpm $QUARTUS_INSTALL_DIR/eda/sim_lib/220model.vhd
+#
+vhdlan $DBG -full64 -nc -work sgate $QUARTUS_INSTALL_DIR/eda/sim_lib/sgate_pack.vhd 
+vhdlan $DBG -full64 -nc -work sgate $QUARTUS_INSTALL_DIR/eda/sim_lib/sgate.vhd
+#
+vlogan  $DBG -full64 -nc -work altera_mf -full64 +v2k $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_mf.v
+#vhdlan $DBG -full64 -nc -work altera_mf $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_mf.vhd
+#vhdlan $DBG -full64 -nc -work altera_mf $QUARTUS_INSTALL_DIR/libraries/vhdl/altera_mf/altera_mf_components.vhd
+vhdlan $DBG -full64 -nc -work altera_mf $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_mf_components.vhd       
+# added clock IP simulation model - synthesis model can't be simulated
+vlogan $DBG -full64 -nc -work altera_mf -full64 +v2k $WORKDIR/altera_config_clock_source_endpoint.v
+#
+vlogan $DBG -full64 -nc -work altera_lnsim -sverilog $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_lnsim.sv 
+vhdlan $DBG -full64 -nc -work altera_lnsim $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_lnsim_components.vhd  
+#
+vlogan $DBG -full64 -nc -work fourteennm -sverilog $QUARTUS_INSTALL_DIR/eda/sim_lib/synopsys/fourteennm_atoms_ncrypt.sv 
+vhdlan $DBG -full64 -nc -work fourteennm $QUARTUS_INSTALL_DIR/eda/sim_lib/fourteennm_atoms.vhd 
+vhdlan $DBG -full64 -nc -work fourteennm $QUARTUS_INSTALL_DIR/eda/sim_lib/fourteennm_components.vhd 
+#
+rm -rf $LIBDIR/vhdl_libs/work/*
+mkdir -p $LIBDIR/vhdl_libs/work/64
+#
+vhdlan $DBG -full64 -work work  \
+$FILESDIR/bram_constants.vhd \
+$FILESDIR/dual_port_bram.vhd \
+$FILESDIR/intel_port_constants_pkg.vhd \
+$FILESDIR/dp_bram_facade.vhd \
+$FILESDIR/march_constants_pkg.vhd \
+$FILESDIR/march_generic_pkg.vhd \
+$FILESDIR/marchx_pkg.vhd \
+$FILESDIR/march_generic.vhd \
+$FILESDIR/standard_port_constants_pkg.vhd \
+$FILESDIR/tpg_converter.vhd \
+$FILESDIR/sp2dp_converter.vhd \
+$FILESDIR/ora.vhd \
+$FILESDIR/capture.vhd \
+$FILESDIR/test_arch.vhd \
+$FILESDIR/harness.vhd \
+$WORKDIR/testbench.vhd
+#
+#$FILESDIR/io_wrapper.vhd
+#
+#$FILESDIR/stratix10gx-iowrapper-50MHz.vhd
+#
+vcs $DBG -full64 -debug_access+all -lca -l comp.log -t ps testbench 
+#vcs $DBG -full64 -debug_access+all -lca -l comp.log -t ps top_level
+#
+#./simv -gui
+#./simv -ucli 
+#./simv +vcs+finish+100000000000
+./simv -verdi &
+#
+#vcs -sverilog -timescale=1ns/1ns -ntb_opts uvm-1.0+rvm +incdir+../sv xbus_tb_top.sv -l comp.log -debug_access+pp  +define+UVM_ON_TOP

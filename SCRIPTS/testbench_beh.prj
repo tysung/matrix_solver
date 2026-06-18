@@ -1,0 +1,15 @@
+vhdl work /import/home/tsung/CODE/cift-internal/temp/all-slices-xcv100efg256-6-2020-08-09T19-04-53/1-srl64/build-00000/constants_pkg.vhd
+vhdl work /import/home/tsung/CODE/cift-internal/builders_repo/architectures/xilinx/virtex/hdl/srl16ce_x4.vhd
+vhdl work /import/home/tsung/CODE/cift-internal/temp/all-slices-xcv100efg256-6-2020-08-09T19-04-53/1-srl64/build-00000/plb.vhd
+vhdl work /import/home/tsung/CODE/cift-internal/temp/all-slices-xcv100efg256-6-2020-08-09T19-04-53/1-srl64/build-00000/gold.vhd
+vhdl work /import/home/tsung/CODE/cift-internal/code/main/ift/builders/plbs/hdl/srl_tpg.vhd
+vhdl work /import/home/tsung/CODE/cift-internal/code/main/ift/builders/plbs/hdl/checker.vhd
+vhdl work /import/home/tsung/CODE/cift-internal/temp/all-slices-xcv100efg256-6-2020-08-09T19-04-53/1-srl64/build-00000/test_gen.vhd
+vhdl work /import/home/tsung/CODE/cift-internal/code/main/ift/builders/plbs/hdl/capture_small.vhd
+vhdl work /import/home/tsung/CODE/cift-internal/code/main/ift/builders/plbs/hdl/harness.vhd
+vhdl work /import/home/tsung/CODE/cift-internal/code/main/ift/builders/plbs/../debug/testbench.vhd
+
+
+
+#vhdl work "./luts1-1.vhd"
+#vhdl work "./luts1_ba.vhd"

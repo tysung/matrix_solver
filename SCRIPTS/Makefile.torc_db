@@ -1,0 +1,86 @@
+#
+SHELL := /bin/bash
+#
+# USAGE: make -j 12 FAMILY="virtex4" all
+#        make FAMILY="qvirtex4" create_pkg
+#
+# define the  family
+FAMILY := virtex4
+# define the directories
+CUR_DIR := $(shell pwd)
+BUILD_DIR = ./$(FAMILY)
+#
+ISE_BIN=/nas/projects/FPGA_tools/tools/linux/xilinx/14.7/ISE_DS/ISE/bin/lin64/ise
+XDL_BIN=/nas/projects/FPGA_tools/tools/linux/xilinx/14.7/ISE_DS/ISE/bin/lin64/xdl
+PARTGEN_BIN=/nas/projects/FPGA_tools/tools/linux/xilinx/14.7/ISE_DS/ISE/bin/lin64/partgen
+#
+DEV_LIST := $(shell perl part_check.pl $(FAMILY) dev)
+PKG_LIST := $(shell perl part_check.pl $(FAMILY) pkg)
+CREATE_PKG_LIST := $(shell perl part_check.pl $(FAMILY) create_pkg)
+DEV_CONN_FILES := $(DEV_LIST:%=%.conns.xdlrc.gz) 
+PKG_FILES := $(PKG_LIST:%=%.xdlrc.gz) 
+DEV_PKG_FILE := $(FAMILY).packages.digest
+FAMILY_DUMP_FILE := $(FAMILY)_dump.pm
+DEV_DIGEST_FILE := $(FAMILY).digest
+DIGEST_FILES := $(DEV_LIST:%=%.digest)
+DB_FILES := $(DEV_LIST:%=%.db)
+LOG_FILES := $(DEV_LIST:%=%.log)
+#
+# define the resulting XDLRC
+# XDLRC = $(BUILD_DIR)/$(DEVICE).xdlrc
+#
+#DEV_LIST := $(shell perl -I . -e 'do "devices.pl"; print join " ", @devices::$(FAMILY)')
+log_files = %.log
+SRCS := $(shell find . -name '*.gz')
+#PKG_FILES := $(filter-out %.conns.xdlrc.gz,$(SRCS)) 
+
+.PHONY: all xdlrc
+
+# create the output directory
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+all: $(BUILD_DIR) create_dev_conn create_pkg read_dev_conn
+	make -j 12 generate_db
+	#mv $(DB_FILES) $(BUILD_DIR)
+
+create_dev_conn: $(DEV_CONN_FILES)
+
+create_pkg:
+	@echo "target: $@ prereq: $?"
+	#source /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+	perl -I . xdlrc.pl packages $(CREATE_PKG_LIST) 
+
+%.conns.xdlrc.gz: 
+	echo "target: $@ prereq: $<"
+	# source . /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+	perl -I . xdlrc.pl xdlrc custom:$(FAMILY):$* 
+
+#%.xdlrc.gz: 
+#	echo "target: $@ prereq: $<"
+#	# source . /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#	perl -I . xdlrc.pl packages custom:$(FAMILY):$* 
+
+%.digest: %.conns.xdlrc.gz
+	echo "target: $@ prereq: $<"
+	perl -I . xdlrc.pl preprocess custom:$(FAMILY):$* 
+
+%.db: %.digest 
+	echo "target: $@ prereq: $<"
+	perl -I . xdlrc.pl process custom:$(FAMILY):$* 
+
+read_dev_conn: $(DIGEST_FILES)
+	echo "target: $? "
+
+generate_db: $(DB_FILES)
+	echo "target: $? "
+
+print-%:
+	echo $* = $($*)
+
+clean:
+	# get rid of the temporary TCL scripts
+	rm -f $(DB_FILES) $(DIGEST_FILES) $(DEV_CONN_FILES) $(PKG_FILES) *.conns.xdlrc 
+	rm -f $(LOG_FILES) $(DEV_PKG_FILE) $(DEV_DIGEST_FILE) $(FAMILY_DUMP_FILE)
+
+

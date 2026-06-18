@@ -1,0 +1,26 @@
+#!/usr/bin/bash -x
+#
+cd /nas/home/tsung/ICESTORM/ice40_db_ply
+# generate the followings:
+# ice40up5k.conns.xdlrc.gz, ice40up5k.xdlrc.gz
+# ice40.packages.digest, ice40up5k.digest
+#
+python parser.py chipdb-5k.txt ICE40UP5K-SG48 
+#
+# create the link for ice40up5k.xdlrc.gz
+# ice40lp1k.xdlrc.gz -> ice40lp1k.xdlrc.gz
+# another xdlrc file - ice40lp1k.conns.xdlrc.gz
+#    output:
+#				ice40lp-1k.db
+#				ice40.db
+#
+cd ~/CODE/torc-internal_ice40/devices/build
+ln -s /nas/home/tsung/ICESTORM/ice40_db_ply/ice40up5k.xdlrc.gz ice40up5k.xdlrc.gz
+ln -s /nas/home/tsung/ICESTORM/ice40_db_ply/ice40up5k.conns.xdlrc.gz .
+ln -s /nas/home/tsung/ICESTORM/ice40_db_ply/ice40up5k.digest .
+ln -s /nas/home/tsung/ICESTORM/ice40_db_ply/ice40.packages.digest .
+# use existing ice40.digest
+#
+perl -I . xdlrc.pl preprocess process custom:ice40:ice40up5k,ice40lp1k
+#perl -I . xdlrc.pl process    custom:ice40:ice40lp1k
+

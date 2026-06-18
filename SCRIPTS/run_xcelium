@@ -1,0 +1,18 @@
+#!/usr/bin/bash -x
+#
+cd /nas/home/tsung/CODE/cift-internal_112023/workspace/work/ecp5_simulation
+#
+export PATH=$PATH:/export/tools/cadence/XCELIUM2103/tools/bin
+export PATH=$PATH:/projects/tools/cadence/installs/VXE2102/bin
+export PATH=$PATH:/projects/tools/cadence/installs/IXCOM2107/bin
+export PATH=$PATH:/projects/tools/cadence/installs/HDLICE2107/bin
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu:2100@rcg-lic.ads.isi.edu:3000@rcg-lic.ads.isi.edu:2700@rcg-lic.ads.isi.edu:5280@rcg-lic.ads.isi.edu:5480@rancor.ads.isi.edu:5285@yoda.ads.isi.edu
+#
+which xrun
+#
+make run
+#xrun -gui &
+#simvision -64 ./waves.shm
+#virtuoso &
+
+

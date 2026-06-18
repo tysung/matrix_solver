@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+export PATH=$PATH:/export/tools/synopsys/M-2016.12-SP1/bin
+#export PATH=$PATH:/export/tools/synopsys/formality/bin
+#
+#cp -r /export/tools/synopsys/formality/doc/fm/tutorial .
+#cp -r /export/tools/synopsys/M-2016.12-SP1/doc/fm/tutorial .
+cd tutorial
+#
+fm_shell -file ../formality.tcl
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+#. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+. /export/tools/xilinx/Vivado/2018.3/settings64.sh
+#
+xvhdl --incr --relax -prj top_level_vhdl.prj
+#
+/export/tools/xilinx/Vivado/2018.3/bin/unwrapped/lnx64.o/xelab -wto 51a5c627f7974fc2989111812c50bbfc --incr --debug typical --relax --mt 8 -L work -L secureip -L xpm --snapshot top_level_behav work.top_level -log elaborate.log 
+#
+xsim -mode tcl -source {xsim.dir/example/xsim_script.tcl}
+#
+#fuse -top TBX_top_level -lib "secureip" -lib "unimacro_ver" -lib "unisims_ver" -o "./testbench_isim_beh.exe" -prj "./testbench_beh.prj" 
+#

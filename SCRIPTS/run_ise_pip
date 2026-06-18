@@ -1,0 +1,7 @@
+#!/bin/bash -x
+#. /export/tools/xilinx/Vivado/2018.3/settings64.sh
+#
+CODE_HOME=~/CODE/sp6_cift-internal
+cd $CODE_HOME
+#
+/nas/home/tsung/CODE/sp6_cift-internal/code/main/ift/builders/interconnect/bin/pip_finder xc6slx45tfgg484-3 /nas/home/tsung/CODE/sp6_cift-internal/temp/interconnect-xc6slx45tfgg484-3-2021-07-08T12-11-17/1-interconnect/init-00001/testable-pips.txt /nas/home/tsung/CODE/sp6_cift-internal/temp/interconnect-xc6slx45tfgg484-3-2021-07-08T12-11-17/1-interconnect/init-00001/unsupported-pips.txt /nas/home/tsung/CODE/sp6_cift-internal/temp/interconnect-xc6slx45tfgg484-3-2021-07-08T12-11-17/1-interconnect/init-00001/inaccessible-pips.txt 48 54 117 114

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="top_level_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="bram_constants" />
+            <top_module name="intel_tpg_constants_pkg" />
+            <top_module name="march_constants_pkg" />
+            <top_module name="march_pkg" />
+            <top_module name="test_constants_pkg" />
+            <top_module name="top_level" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="125297000fs"></ZoomStartTime>
+      <ZoomEndTime time="125718001fs"></ZoomEndTime>
+      <Cursor1Time time="125600000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="169"></NameColumnWidth>
+      <ValueColumnWidth column_width="81"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="27" />
+   <wvobject type="logic" fp_name="/top_level/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/pass">
+      <obj_property name="ElementShortName">pass</obj_property>
+      <obj_property name="ObjectShortName">pass</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/tpg0/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/tpg0/enable">
+      <obj_property name="ElementShortName">enable</obj_property>
+      <obj_property name="ObjectShortName">enable</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/tpg0/done">
+      <obj_property name="ElementShortName">done</obj_property>
+      <obj_property name="ObjectShortName">done</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/tpg0/start_a">
+      <obj_property name="ElementShortName">start_a</obj_property>
+      <obj_property name="ObjectShortName">start_a</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/tpg0/check_a">
+      <obj_property name="ElementShortName">check_a</obj_property>
+      <obj_property name="ObjectShortName">check_a</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_level/harness/test_i/tpg0/inputs_a">
+      <obj_property name="ElementShortName">inputs_a[23:0]</obj_property>
+      <obj_property name="ObjectShortName">inputs_a[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/tpg0/start_b">
+      <obj_property name="ElementShortName">start_b</obj_property>
+      <obj_property name="ObjectShortName">start_b</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/tpg0/check_b">
+      <obj_property name="ElementShortName">check_b</obj_property>
+      <obj_property name="ObjectShortName">check_b</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_level/harness/test_i/tpg0/inputs_b">
+      <obj_property name="ElementShortName">inputs_b[23:0]</obj_property>
+      <obj_property name="ObjectShortName">inputs_b[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/tpg0/port_select">
+      <obj_property name="ElementShortName">port_select</obj_property>
+      <obj_property name="ObjectShortName">port_select</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/top_level/harness/test_i/tpg0/tpg_i/tpg_i/global_state">
+      <obj_property name="ElementShortName">global_state</obj_property>
+      <obj_property name="ObjectShortName">global_state</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/clka">
+      <obj_property name="ElementShortName">clka</obj_property>
+      <obj_property name="ObjectShortName">clka</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/rsta">
+      <obj_property name="ElementShortName">rsta</obj_property>
+      <obj_property name="ObjectShortName">rsta</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/wea">
+      <obj_property name="ElementShortName">wea</obj_property>
+      <obj_property name="ObjectShortName">wea</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/ena">
+      <obj_property name="ElementShortName">ena</obj_property>
+      <obj_property name="ObjectShortName">ena</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/address_a">
+      <obj_property name="ElementShortName">address_a[10:0]</obj_property>
+      <obj_property name="ObjectShortName">address_a[10:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/dina">
+      <obj_property name="ElementShortName">dina[9:0]</obj_property>
+      <obj_property name="ObjectShortName">dina[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/douta">
+      <obj_property name="ElementShortName">douta[9:0]</obj_property>
+      <obj_property name="ObjectShortName">douta[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/clkb">
+      <obj_property name="ElementShortName">clkb</obj_property>
+      <obj_property name="ObjectShortName">clkb</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/rstb">
+      <obj_property name="ElementShortName">rstb</obj_property>
+      <obj_property name="ObjectShortName">rstb</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/web">
+      <obj_property name="ElementShortName">web</obj_property>
+      <obj_property name="ObjectShortName">web</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/enb">
+      <obj_property name="ElementShortName">enb</obj_property>
+      <obj_property name="ObjectShortName">enb</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/address_b">
+      <obj_property name="ElementShortName">address_b[10:0]</obj_property>
+      <obj_property name="ObjectShortName">address_b[10:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/dinb">
+      <obj_property name="ElementShortName">dinb[9:0]</obj_property>
+      <obj_property name="ObjectShortName">dinb[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_level/harness/test_i/bram_uut_M20K_X15_Y1_N0/internal_bram/doutb">
+      <obj_property name="ElementShortName">doutb[9:0]</obj_property>
+      <obj_property name="ObjectShortName">doutb[9:0]</obj_property>
+   </wvobject>
+</wave_config>

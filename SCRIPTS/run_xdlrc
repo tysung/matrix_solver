@@ -1,0 +1,8 @@
+#!/bin/bash
+. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+cd /nas/home/tsung/CIFT_PACKAGE
+# TORC DB generation in this area after package got generated.
+#cd /nas/home/tsung/CODE/torc-internal/devices/build
+#
+xdl -report -pips -all_conns xc5vlx110tff1136 v6.xdlrc

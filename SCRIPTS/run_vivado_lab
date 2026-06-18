@@ -1,0 +1,7 @@
+#!/bin/bash
+#. /opt/xilinx/Vivado_Lab/2020.2/settings64.sh
+. /opt/xilinx/14.7/LabTools/settings64.sh
+#
+#vivado_lab
+impact &
+

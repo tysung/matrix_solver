@@ -1,0 +1,74 @@
+#!/bin/bash -x
+# export VM_NAME=$CI_JOB_ID
+# export SSH_PORT=$(printf %03d%02d $CI_SSH_PREFIX $CI_CONCURRENT_ID)
+# export SSH="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p$SSH_PORT"
+# test/qa/provision_vm $VM_NAME $SSH_PORT $UBUNTU_OSTYPE $UBUNTU_VDI torc-${TORC_UBUNTU}.vdi rapidwright-${RAPIDWRIGHT_VERSION}.vdi
+#
+export VM_NAME="cift-ubuntu-ci-1"
+export VM_SSH_PORT="3024"
+#VM_SSH_PORT = "22"
+export CI_PROJECT_DIR="/nas/home/tsung/VIRTUALBOX"
+#CIFT_VDI_DIR = "/projects/cift/release-vms/tools"
+#SSH="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p$SSH_PORT"
+#
+#vboxmanage internalcommands sethduuid ./ubuntu-cift-v2.8-base.vdi
+vboxmanage internalcommands sethduuid ./cift.vdi
+#
+vboxmanage createvm --name $VM_NAME --platform-architecture=x86 --basefolder=$CI_PROJECT_DIR --ostype=Ubuntu20_LTS_64 --register
+#
+vboxmanage modifyvm $VM_NAME --memory 262288 --acpi on --x2apic on --pae on --graphicscontroller vmsvga --cpus 10 --rtcuseutc on --vram 16 --nic1 nat --natpf1 SSH-VM,tcp,,3024,,22
+#
+vboxmanage storagectl $VM_NAME --name SATA --add sata --controller IntelAHCI --portcount 8 --hostiocache off --bootable on
+#
+vboxmanage storageattach $VM_NAME --storagectl SATA --port 0 --medium ./ubuntu-cift-v2.8-base.vdi --mtype immutable --type hdd
+#
+vboxmanage storageattach $VM_NAME --storagectl SATA --port 1 --medium ./cift.vdi --type hdd
+#
+#
+vboxmanage startvm $VM_NAME --type=headless
+#
+#
+vboxmanage controlvm $VM_NAME poweroff || true
+#vboxmanage unregistervm $VM_NAME --delete
+#
+#
+exit
+#
+vboxmanage sharedfolder add $VM_NAME --name=ci --hostpath=$CI_PROJECT_DIR --transient
+vboxmanage sharedfolder add $VM_NAME --name=opt --hostpath=$OPT_DIR --transient
+sshpass -v -p user ssh-copy-id -p$SSH_PORT -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null user@127.0.0.1
+
+$SSH user@127.0.0.1 " echo user | sudo -S mkdir /media/sf_ci; echo user | sudo -S mount -t vboxsf -o uid=\$USER,gid=vboxsf ci /media/sf_ci; echo user | sudo -S mkdir /media/opt; echo user | sudo -S mount -t vboxsf -o uid=\$USER,gid=vboxsf opt /media/opt"
+
+$SSH user@127.0.0.1 " echo user | sudo -S chown user:user /opt/cift; cp -r /media/opt/nextpnr-cift/q15-ubuntu /opt/cift/nextpnr; cp -r /media/opt/capnproto/1.0.1-ubuntu /opt/cift/capnproto; mkdir -p /opt/cift/rapidwright; mkdir -p /opt/cift/rapidwright/$RAPIDWRIGHT_VERSION; mkdir -p /opt/cift/torc; echo user | sudo -S mount /dev/sdb /opt/cift/torc; echo user | sudo -S mount /dev/sdc /opt/cift/rapidwright/$RAPIDWRIGHT_VERSION"
+
+
+$SSH user@127.0.0.1 " python3.9 -m venv /home/user/python3; source /home/user/python3/bin/activate; python3 -m pip install --upgrade pip; python3 -m pip install wheel; mkdir /media/sf_ci/build; cd /media/sf_ci/build; /opt/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Release -DTORC_ROOT=/opt/cift/torc -DNE    XTPNR_ROOT=/opt/cift/nextpnr -DCIFT_FAMILIES=ise,vivado,microsemi,altera ..; make -j8 installer; deactivate"
+
+$SSH user@127.0.0.1 " echo user | sudo -S umount /opt/cift/torc; echo user | sudo -S umount /opt/cift/rapidwright/$RAPIDWRIGHT_VERSION"
+
+$SSH user@127.0.0.1 "echo user | sudo -S shutdown now" || true
+
+#after_script:
+    - vboxmanage controlvm $CI_JOB_ID poweroff || true
+    - vboxmanage unregistervm $CI_JOB_ID --delete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$ vboxmanage controlvm $CI_JOB_ID poweroff || true
+
+
+$ vboxmanage unregistervm $CI_JOB_ID --delete
+
+

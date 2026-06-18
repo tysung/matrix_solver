@@ -1,0 +1,12 @@
+#!/bin/bash -x
+#
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu:2100@rcg-lic.ads.isi.edu:3000@rcg-lic.ads.isi.edu:2700@rcg-lic.ads.isi.edu:5280@rcg-lic.ads.isi.edu
+export PATH=$PATH:/export/tools/synopsys/fpga/Q-2020.03/bin
+export XILINX_VIVADO=/projects/tools/xilinx/Vivado/2021.2
+#
+synplify_pro -batch design.prj -tclcmd "project -run" 
+synplify_pro &
+#synplify_premier -tcl synplify.tcl
+#synplify_premier_dp -tcl proj_1.prj -tclcmd "project -run" 
+#
+

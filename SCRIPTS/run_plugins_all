@@ -1,0 +1,31 @@
+#!/bin/bash -x
+#
+# check ~/.config/cift/settings.toml for $TORC/$XILINX_ISE/$XILINX_VIVADO env
+#
+ulimit -s unlimited
+export LD_LIBRARY_PATH=/opt/boost/boost-1.76.0/lib
+#
+family="series7"
+cift="/nas/home/tsung/CODE/sp6_cift-internal"
+cd ${cift} 
+#
+./installations/full/cift-cli ./testgroups/${family}/build-tests-harness-script.py    
+sed -i 's/\/nas\/home\/tsung\/CODE\/sp6_cift-internal\/installations\/full\///g' ./testgroups/${family}/build-tests-harness.ift-tgc
+#
+./installations/full/cift-cli ./testgroups/${family}/build-tests-configmem-script.py
+sed -i 's/\/nas\/home\/tsung\/CODE\/sp6_cift-internal\/installations\/full\///g' ./testgroups/${family}/build-tests-configmem.ift-tgc
+#
+./installations/full/cift-cli ./testgroups/${family}/build-tests-slices-script.py
+sed -i 's/\/nas\/home\/tsung\/CODE\/sp6_cift-internal\/installations\/full\///g' ./testgroups/${family}/build-tests-slices.ift-tgc
+#
+#
+./installations/full/cift-cli ./testgroups/${family}/build-tests-brams-script.py      
+sed -i 's/\/nas\/home\/tsung\/CODE\/sp6_cift-internal\/installations\/full\///g' ./testgroups/${family}/build-tests-brams.ift-tgc
+#
+./installations/full/cift-cli ./testgroups/${family}/build-tests-interconnect-script.py
+sed -i 's/\/nas\/home\/tsung\/CODE\/sp6_cift-internal\/installations\/full\///g' ./testgroups/${family}/build-tests-interconnect.ift-tgc
+#
+#
+#./installations/full/cift-cli testgroups/spartan6/run-tests-series6.py
+
+#

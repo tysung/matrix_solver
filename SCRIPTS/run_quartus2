@@ -1,0 +1,28 @@
+#!/bin/bash -x
+#. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu
+export PATH=/nas/home/tsung/intelFPGA_pro/24.3/quartus/bin:$PATH
+#export PATH=/opt/intel/quartus/21.4/quartus/bin:$PATH
+#
+#
+quartus_stp --tcl_eval get_hardware_names
+quartus_stp --tcl_eval get_device_names -hardware_name {AGF FPGA Development Kit [1-13.2.5]}
+#
+#quartus --64bit &
+#quartus_pgm -help
+#quartus_sh -g  lab &
+#
+#quartus_sh -t setup_bram_s10.tcl 
+#quartus_syn s10_dual_port_ram 
+#quartus_fit s10_dual_port_ram 
+#quartus_asm s10_dual_port_ram 
+#quartus s10_dual_port_ram &
+#quartus_sta filtref --model=fast --export_settings=off 
+#mv filtref_sta.rpt filtref_sta_1.rpt 
+#quartus_sta filtref --export_settings=off 
+#mv filtref_sta.rpt filtref_sta_2.rpt
+#
+#quartus_sh -t setup_proj.tcl
+#quartus_sh --flow compile lab 
+#

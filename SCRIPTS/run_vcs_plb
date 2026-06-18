@@ -1,0 +1,45 @@
+#!/bin/bash -x
+#
+# libraries - altera simulation library generated from quartus run
+# synopsys_sim.setup - vcs simulation setup file
+#
+#export VCS_HOME=/export/tools/synopsys/L-2016.06-SP1
+#export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+export VCS_HOME=/opt/synopsys/vcs/S-2021.09-1
+export PATH=$VCS_HOME/bin:$PATH
+export LM_LICENSE_FILE=3000@rcg-lic.ads.isi.edu
+#
+repodir=/nas/home/tsung/CODE/cift-internal_05_2024
+workdir=$repodir/workspace/plb_regtest1/files
+package=$repodir/venv/lib/python3.9/site-packages
+#
+cd $workdir
+#
+mkdir -p libraries/vhdl_libs/work
+rm -rf libraries/vhdl_libs/work/*
+#export VCS_ARCH_OVERRIDE=amd64
+#export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
+#
+# $workdir/sb_ice_syn_vital.vhd 
+#
+vlogan  -kdb -full64 -nc -work work -full64 +v2k $workdir/sb_ice_syn_new.v
+#
+vhdlan -kdb -full64 -work work  \
+$workdir/constants_pkg.vhd \
+$workdir/slice_reg1.vhd \
+$workdir/plb.vhd \
+$workdir/gold.vhd \
+$workdir/regtest1_tpg_3_1.vhd \
+$workdir/ora.vhd \
+$workdir/test_gen.vhd \
+$workdir/capture_small.vhd \
+$workdir/harness.vhd \
+$package/cift_lattice/ice40/hdl/testbench.vhd
+#
+vcs -kdb -full64 -debug_access+all -lca -t ps testbench 
+#
+./simv -gui
+#./simv -ucli 
+#./simv +vcs+finish+100
+#
+#vcs -sverilog -timescale=1ns/1ns -ntb_opts uvm-1.0+rvm +incdir+../sv xbus_tb_top.sv -l comp.log -debug_access+pp  +define+UVM_ON_TOP

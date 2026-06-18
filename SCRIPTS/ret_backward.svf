@@ -1,0 +1,6 @@
+#
+#
+guide
+guide_retiming -design top -direction backward -libCell {LUT4} -input {I0:y_r3_reg_bret__2 I1:y_r3_reg_bret__1 I2:y_r3_reg_bret__0 I3:y_r3_reg_bret} -output {O:y_r3_reg}
+#guide_retiming_finished
+setup

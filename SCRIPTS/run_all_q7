@@ -1,0 +1,44 @@
+#!/bin/bash -x
+#export CXX=/usr/bin/g++-8
+#export LD_LIBRARY_PATH=/opt/boost/boost-1.76.0/lib
+#
+#rm -rf cift-internal
+#
+#git clone https://tsung@rcg.isi.edu/cift/cift-internal.git 
+#
+cd cift-internal
+#git checkout -b tdh\/quartus origin/tdh\/quartus
+#
+./install <<EOF
+
+./installations/full
+Y
+
+
+Y
+Y
+Y
+n
+
+
+/opt/torc/latest
+EOF
+#
+families=( spartan7 )
+groups=( harness configmem slices brams )
+#groups=( harness configmem slices brams interconnect )
+for family in "${families[@]}"
+do
+   for group in "${groups[@]}"
+   do
+	   echo "### Build tests for family: $family group: $group  ###"
+	   sed -i 's/parallel_jobs = 1$/parallel_jobs = 20/' ./testgroups/${family}/build-tests-${group}-script.py
+      if [ $group == "slices" ] || [ $group == "brams" ]
+      then
+         sed -i 's/^# other_args/other_args/' ./testgroups/${family}/build-tests-${group}-script.py
+      fi
+      ./installations/full/cift-cli ./testgroups/${family}/build-tests-${group}-script.py
+   done
+done
+#
+echo "Build Finish"

@@ -1,0 +1,9 @@
+#!/bin/bash -x
+#. /export/tools/xilinx/Vivado/2018.3/settings64.sh
+#
+CODE_HOME=~/CODE/sp6_cift-internal
+cd $CODE_HOME
+#
+/nas/home/tsung/CODE/sp6_cift-internal/installations/full/python/lib/python3.9/site-packages/cift_xilinx/spartan6/bin/router-spartan6 xc6slx45csg484-3 work/2021-08-16T19-57-00/1-xc6slx45csg484-3-intcnt-interconnect-region_area/build-00001/pips-1-1 work/2021-08-16T19-57-00/1-xc6slx45csg484-3-intcnt-interconnect-region_area/init-00000/harness.xdl work/2021-08-16T19-57-00/1-xc6slx45csg484-3-intcnt-interconnect-region_area/build-00001/results.txt work/2021-08-16T19-57-00/1-xc6slx45csg484-3-intcnt-interconnect-region_area/build-00001/interconnect-1-1.xdl /opt/torc
+#
+#/nas/home/tsung/CODE/sp6_cift-internal/code/main/ift/builders/interconnect/bin/router xc6slx45tfgg484-3 /nas/home/tsung/CODE/sp6_cift-internal/temp/interconnect-xc6slx45tfgg484-3-2021-07-13T12-25-52/1-interconnect/build-00001/pips-1 /nas/home/tsung/CODE/sp6_cift-internal/temp/interconnect-xc6slx45tfgg484-3-2021-07-13T12-25-52/1-interconnect/init-00000/harness.xdl /nas/home/tsung/CODE/sp6_cift-internal/temp/interconnect-xc6slx45tfgg484-3-2021-07-13T12-25-52/1-interconnect/build-00001/results.txt /nas/home/tsung/CODE/sp6_cift-internal/temp/interconnect-xc6slx45tfgg484-3-2021-07-13T12-25-52/1-interconnect/build-00001/interconnect-1.xdl

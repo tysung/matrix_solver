@@ -1,0 +1,43 @@
+#!/bin/bash -x
+#export VCS_HOME=/opt/synopsys/vcs/S-2021.09-1
+export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+export PATH=$VCS_HOME/bin:$PATH
+export LM_LICENSE_FILE=3000@rcg-lic.ads.isi.edu
+#export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu:2100@rcg-lic.ads.isi.edu:3000@rcg-lic.ads.isi.edu:2700@rcg-lic.ads.isi.edu:5280@rcg-lic.ads.isi.edu
+#
+REPO_DIR=/nas/home/tsung/CODE/cift-internal_feb2024
+WORKDIR=$REPO_DIR/workspace/work/vcs_simulation
+CIFT_PLUGINS=$REPO_DIR/venv/lib/python3.9/site-packages
+
+#
+cd $WORKDIR
+#mkdir -p work
+#
+#vhdlan -full64 -work work -nc \
+#$WORKDIR/bram_constants.vhd \
+#$CIFT_PLUGINS/cift_lattice/ice40/hdl/simple_dual_port_bram.vhd \
+#$CIFT_PLUGINS/cift_lattice/ice40/hdl/ebr_tpg_constants_pkg.vhd \
+#$WORKDIR/dp_bram_facade.vhd \
+#$WORKDIR/march_constants_pkg.vhd \
+#$WORKDIR/march_generic_pkg.vhd \
+#$CIFT_PLUGINS/cift/builders/bram/single_port/hdl/marchx_pkg.vhd \
+#$WORKDIR/march_generic.vhd \
+#$WORKDIR/sp2sdp_tpg.vhd \
+#$WORKDIR/standard_port_constants_pkg.vhd \
+#$CIFT_PLUGINS/cift_lattice/ice40/hdl/ebr_tpg_constants_pkg.vhd \
+#$WORKDIR/generic_dp_tpg_converter.vhd \
+#$CIFT_PLUGINS/cift/builders/bram/hdl/ora.vhd \
+#$CIFT_PLUGINS/cift/builders/bram/hdl/capture.vhd \
+#$WORKDIR/test_arch.vhd \
+#$CIFT_PLUGINS/cift/builders/bram/hdl/harness.vhd \
+#$CIFT_PLUGINS/cift/builders/bram/../debug/testbench.vhd
+#
+#
+#vcs -full64 -nc testbench
+#
+#./simv -help
+./simv
+#./simv -gui
+#./simv -ucli 
+#./simv +vcs+finish+100
+#

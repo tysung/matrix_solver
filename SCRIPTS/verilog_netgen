@@ -1,0 +1,32 @@
+#!/bin/bash
+. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+netgen -w -insert_glbl true -ism -ul -aka -sim -ofmt verilog -intstyle ise -mhf -pcf harness_placed.pcf -tb -mhf harness.ncd
+#
+#
+#verilog work "./harness.v"
+#verilog work "./lvds_ba.vlg"
+#
+# lvds_ba.vlg
+#
+#`include "/import/projects/FPGA_tools/tools/linux/xilinx/14.7/ISE_DS/ISE/verilog/src/glbl.v"
+#`timescale 1 ns/1 ps
+#
+#  module TBX_top_level;
+#
+#
+#!/bin/bash
+#
+. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#. /export/tools/xilinx/11.4/ISE_DS/settings64.sh
+#
+fuse -top TBX_top_level -top glbl -lib "secureip" -lib "unimacro_ver" -lib "unisims_ver" -o "./BA_isim.exe" -prj "./BA.prj" 
+#
+./BA_isim.exe -gui
+# - run isim with gui
+# it's not working for ISE 10.1 version
+#
+#fuse -top testbench -lib "secureip" -lib "unimacro_ver" -lib "unisims_ver" -o "./testbench_isim_beh.exe" -prj "./testbench_beh.prj" 
+#
+#./testbench_isim_beh.exe -gui
+#

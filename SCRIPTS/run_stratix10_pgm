@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+quartus_pgm -c "USB-BlasterII [1-1.4.2.1.1]" -m jtag -o "p;/nas/home/tsung/CODE/cift-internal_082023/workspace/tests/stratix 10/1sg280lu2f50e2vg/bram-marchx_2kx10_qdp/marchx_2kx10_qdp-00000.sof@2"
+

@@ -1,0 +1,37 @@
+#/bin/bash -x
+# this example YAML file
+# this is ci_cd branch test
+#
+cd ~/CODE
+#
+rm -rf prjxray/build 
+rm -rf prjxray 
+git clone https://github.com/SymbiFlow/prjxray.git
+git submodule update --init --recursive
+#
+cd prjxray
+#
+export XRAY_VIVADO_SETTINGS=/export/tools/xilinx/Vivado/2017.2/settings64.sh
+make build
+#
+make env
+./download-latest-db.sh
+make db-prepare-kintex7
+source settings/kintex7.sh
+#
+mkdir cicd-test
+cd cicd-test
+cp /nas/home/tsung/CODE/torc-internal/Build/top_mult.bit .
+#cp /nas/home/tsung/CODE/torc-internal/Build/XADC_TEST.bit .
+$XRAY_BIT2FASM top_mult.bit |& tee ./top_mult.fasm
+#$XRAY_BITREAD top_mult.bit |& tee ./top_mult.frm
+#
+echo "DSP_R_X9Y0.DSP48.DSP_0.UNDOCUMENTED_AREG_UD2" >> top_mult.fasm
+echo "MONITOR_BOT_FUJI2_X61Y131.XADC.UNDOCUMENTED_INIT_40.CHANNEL_7" >> top_mult.fasm
+echo "" >> top_mult.fasm
+#
+python3 brace-assembler.py --db-root2 ./brace-db -f cicd-test/top_mult.fasm -o top_mult.frm --format frm
+$XRAY_TOOLS_DIR/xc7frames2bit -frm_file ./top_mult.frm -output_file ./top_mult.fasm.bit -part_file $XRAY_PART_YAML -part_name $XRAY_PART
+#
+echo "Done Prjxray"
+#

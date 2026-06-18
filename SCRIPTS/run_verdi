@@ -1,0 +1,15 @@
+#!/bin/bash -x
+#
+#export VCS_HOME=/export/tools/synopsys/L-2016.06-SP1
+export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+#export VCS_HOME=/export/tools/synopsys/vc_static/R-2020.12/vcs-mx
+#export VERDI_HOME=/export/tools/synopsys/verdi3
+export VERDI_HOME=/export/tools/synopsys/vc_static/R-2020.12/verdi
+export PATH=$VERDI_HOME/bin:$VCS_HOME/bin:$PATH
+#
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu:2100@rcg-lic.ads.isi.edu:3000@rcg-lic.ads.isi.edu:2700@rcg-lic.ads.isi.edu:5280@rcg-lic.ads.isi.edu
+#
+#verdi & 
+./simv -verdi & 
+#verdi -simflow -simdir /nas/home/tsung/VCS_SIM_CIFT -lib work -top top_level  &
+

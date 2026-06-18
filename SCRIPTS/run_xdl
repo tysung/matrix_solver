@@ -1,0 +1,15 @@
+#!/bin/bash
+#. /export/tools/xilinx/10.1/ISE_DS/settings64.sh
+. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+#xdl -ncd2xdl harness.ncd
+#
+xdl -xdl2ncd FFInitLowSrLow-0.xdl
+#
+#which ise
+#
+#ngc2edif harness.ngc 
+#
+# pin X/F1,F2,F3,F4 must exist! - check inpin/outpin
+# egrep -n 'inpin|outpin' harness.xdl | grep 'outputs<1><1>
+#

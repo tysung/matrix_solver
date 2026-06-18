@@ -1,0 +1,25 @@
+#!/usr/bin/bash -x
+#
+cd /nas/home/tsung/CODE/cift-travis
+export CIFT_SETTINGS_FILE=~/.config/cift/settings.toml
+#export CIFT_SETTINGS_FILE=~/CODE/cift-internal_082023/test/qa/settings.toml
+export CIFT_INSTALL_ROOT_TEST=~/CODE/cift-travis
+#export CIFT_INSTALL_ROOT=~/CODE/cift-internal_082023
+#export CIFT_ROOT=~/CODE/cift-internal_082023
+export CIFT_LOGGING_LEVEL=DEBUG
+#
+source venv/bin/activate
+#
+# build script issue:
+# [region has zero instance/io_files with array/import cift/Part 280 - part change need new IO constraint]
+#
+#python3.9 -m cift.internal.cli ./stratix10_bram.py
+python3.9 -m cift.internal.gui.main
+#python3.9 -m cift.internal.cli ./testgroups/lattice/ice40/build-tests-harness-script.py 
+#python3.9 -m cift.internal.cli ./testgroups/lattice/ice40/build-tests-brams-script.py 
+#python3.9 -m cift.internal.cli ./testgroups/xilinx-ise/series7/build-tests-brams-script.py 
+#python3.9 -m cift.internal.cli ./testgroups/intel/stratix10/build-tests-labs-script.py 
+#python3.9 -m cift.internal.cli ./testgroups/intel/stratix10/build-tests-brams-script.py 
+#
+#./installations/full/cift-cli ./intel_s10_bram.py
+#

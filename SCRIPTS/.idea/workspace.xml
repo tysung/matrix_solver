@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="07026b3d-11a5-4d99-813d-2a0460c8490f" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="23cil85sgtRDMytkllPgFieckR6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Formality_Timing" type="#PerlConfigurationType" factoryName="Perl" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="alternativeSdkName" />
+      <option name="compileTimeBreakpointsEnabled" value="false" />
+      <option name="consoleCharset" value="UTF-8" />
+      <option name="envs">
+        <map>
+          <entry key="PERL5LIB" value="$PROJECT_DIR$/../Downloads/Devel-Camelcadedb/lib:$PROJECT_DIR$/../perl5/lib/perl5" />
+        </map>
+      </option>
+      <option name="initCode" value="" />
+      <option name="nonInteractiveModeEnabled" value="false" />
+      <option name="passParentEnvs" value="true" />
+      <option name="perlParameters" value="" />
+      <option name="programParameters" value="./LIB/X_LUT5.vhd" />
+      <option name="scriptCharset" value="utf8" />
+      <option name="scriptPath" value="$PROJECT_DIR$/timing_formality.pl" />
+      <option name="startMode" value="RUN" />
+      <option name="useAlternativeSdk" value="false" />
+      <option name="workingDirectory" value="$PROJECT_DIR$/../FORMALITY/SLICE_TEST" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="07026b3d-11a5-4d99-813d-2a0460c8490f" name="Default Changelist" comment="" />
+      <created>1642039923117</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1642039923117</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="390" y="179" width="1162" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1642043721580">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state x="390" y="179" width="1162" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.28.1920.1024@0.28.1920.1024" timestamp="1642043721580" />
+    <state x="754" y="264" width="426" height="512" key="FileChooserDialogImpl" timestamp="1642040150217">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state x="754" y="264" width="426" height="512" key="FileChooserDialogImpl/0.28.1920.1024@0.28.1920.1024" timestamp="1642040150217" />
+    <state width="1418" height="305" key="GridCell.Tab.0.bottom" timestamp="1642043730756">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.0.bottom/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730756" />
+    <state width="1418" height="305" key="GridCell.Tab.0.center" timestamp="1642043730756">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.0.center/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730756" />
+    <state width="1418" height="305" key="GridCell.Tab.0.left" timestamp="1642043730756">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.0.left/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730756" />
+    <state width="1418" height="305" key="GridCell.Tab.0.right" timestamp="1642043730756">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.0.right/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730756" />
+    <state width="1418" height="305" key="GridCell.Tab.1.bottom" timestamp="1642043740242">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.1.bottom/0.28.1920.1024@0.28.1920.1024" timestamp="1642043740242" />
+    <state width="1418" height="305" key="GridCell.Tab.1.center" timestamp="1642043740241">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.1.center/0.28.1920.1024@0.28.1920.1024" timestamp="1642043740241" />
+    <state width="1418" height="305" key="GridCell.Tab.1.left" timestamp="1642043740241">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.1.left/0.28.1920.1024@0.28.1920.1024" timestamp="1642043740241" />
+    <state width="1418" height="305" key="GridCell.Tab.1.right" timestamp="1642043740241">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.1.right/0.28.1920.1024@0.28.1920.1024" timestamp="1642043740241" />
+    <state width="1418" height="305" key="GridCell.Tab.2.bottom" timestamp="1642043730675">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.2.bottom/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730675" />
+    <state width="1418" height="305" key="GridCell.Tab.2.center" timestamp="1642043730674">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.2.center/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730674" />
+    <state width="1418" height="305" key="GridCell.Tab.2.left" timestamp="1642043730674">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.2.left/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730674" />
+    <state width="1418" height="305" key="GridCell.Tab.2.right" timestamp="1642043730675">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.2.right/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730675" />
+    <state width="1418" height="305" key="GridCell.Tab.3.bottom" timestamp="1642043730676">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.3.bottom/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730676" />
+    <state width="1418" height="305" key="GridCell.Tab.3.center" timestamp="1642043730675">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.3.center/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730675" />
+    <state width="1418" height="305" key="GridCell.Tab.3.left" timestamp="1642043730675">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.3.left/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730675" />
+    <state width="1418" height="305" key="GridCell.Tab.3.right" timestamp="1642043730676">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state width="1418" height="305" key="GridCell.Tab.3.right/0.28.1920.1024@0.28.1920.1024" timestamp="1642043730676" />
+    <state x="584" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1645038996045">
+      <screen x="0" y="28" width="1920" height="1024" />
+    </state>
+    <state x="584" y="347" key="com.intellij.ide.util.TipDialog/0.28.1920.1024@0.28.1920.1024" timestamp="1645038996045" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="perl_line_breakpoint">
+          <url>file://$PROJECT_DIR$/timing_formality.pl</url>
+          <line>20</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="perl_line_breakpoint">
+          <url>file://$PROJECT_DIR$/timing_formality.pl</url>
+          <line>34</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

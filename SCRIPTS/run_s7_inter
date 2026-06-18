@@ -1,0 +1,10 @@
+#!/bin/bash -x
+cift="/nas/home/tsung/CODE/cift-internal"
+install="${cift}/installations/full/python/lib/python3.9/site-packages"
+dir="cift-workspace/work/2022-07-26T19-42-41"
+result="${cift}/${dir}/1-interconnect/init-00001"
+#
+java -cp .:${install}/cift_xilinx/vivado_build/jars/log4j-api-2.17.2.jar:${install}/cift_xilinx/vivado_build/jars/log4j-core-2.17.2.jar:${install}/cift_xilinx/vivado_build/jars/rapidwright-2022.1.1-standalone-lin64.jar:${install}/cift_xilinx/vivado_build/interconnect/bin/RapidRouter.jar edu.isi.cift.PipFinder xc7s25csga324-1 ${result}/testable-pips.txt ${result}/unsupported-pips.txt ${result}/inaccessible-pips.txt 31 32 34 30
+
+
+

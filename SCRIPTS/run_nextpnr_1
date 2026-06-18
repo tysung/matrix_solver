@@ -1,0 +1,4 @@
+#!/usr/bin/bash -x
+nextpnr-ice40 --up5k --package sg48 --pcf icebreaker.pcf --json example.json --asc example.asc --gui
+#nextpnr-ice40 --json example.json --pcf icebreaker.pcf --asc example.asc --gui
+

@@ -1,0 +1,31 @@
+#!/usr/bin/bash -x
+#
+# run unittest after wheel get created during build process
+#
+cd ~/CODE/cift-internal_feb2024
+#
+# create python venv base on wheels get created during build
+#
+#python3.9 -m venv venv
+#source venv/bin/activate
+#. installations/python/bin/activate
+#pip install -r requirements.txt
+#pip install build/wheels/cift_full-*-py3-none-any.whl build/wheels/cift_lattice_diamond*.whl build/wheels/cift_torc*.whl 
+#pip install build/wheels/* 
+#
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu
+export CIFT_SETTINGS_FILE=~/.config/cift/settings.toml
+export CIFT_INSTALL_ROOT_TEST=~/CODE/cift-internal_feb2024
+#export CIFT_INSTALL_ROOT=~/CODE/cift-internal_082023
+#export CIFT_ROOT=~/CODE/cift-internal_082023
+export CIFT_LOGGING_LEVEL=DEBUG
+#
+source venv/bin/activate
+cd code/plugins/lattice/icecube2/test/python
+python3 -m unittest test_device_info.TestDeviceInfo.test_get_tiles_by_bbox
+#python3 -m unittest test_icecube_prj.TestIcecubeProject.test_prj
+#python -m xmlrunner -o=reports discover -s code/plugins/lattice/diamond/test/python
+#
+#python3.9 -m cift.internal.cli ./testgroups/intel/stratix10/build-tests-labs-script.py 
+#
+#

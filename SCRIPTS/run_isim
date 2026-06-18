@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+#fuse -top testbench -lib "secureip" -lib "unimacro_ver" -lib "unisims_ver" -o "./testbench_isim_beh.exe" -prj "./testbench_beh.prj" 
+#
+./testbench_isim_beh.exe <<EOF
+run all
+quit
+EOF 
+# it's not working for ISE 10.1 version
+#

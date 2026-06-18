@@ -1,0 +1,50 @@
+{
+    "X_rsce": [
+        "c_buf",
+        "carry8",
+        "dsps",
+        "iob",
+        "luts",
+        "regs"
+    ],
+    "Y_name": [
+        "equivalent_regs_off.synth.dcp",
+        "equivalent_regs_wrapper_on.synth.dcp",
+        "lut_combining_off.synth.dcp",
+        "lut_combining_wrapper_on.synth.dcp"
+    ],
+    "Cells": {
+        "equivalent_regs_off.synth.dcp": {
+            "luts": "    0 ",
+            "regs": "    1 ",
+            "carry8": "    0 ",
+            "dsps": "    0 ",
+            "iob": "    0 ",
+            "c_buf": "    0 "
+        },
+        "equivalent_regs_wrapper_on.synth.dcp": {
+            "luts": "    0 ",
+            "regs": "    2 ",
+            "carry8": "    0 ",
+            "dsps": "    0 ",
+            "iob": "    4 ",
+            "c_buf": "    1 "
+        },
+        "lut_combining_off.synth.dcp": {
+            "luts": "  579 ",
+            "regs": "   38 ",
+            "carry8": "    0 ",
+            "dsps": "    0 ",
+            "iob": "    0 ",
+            "c_buf": "    0 "
+        },
+        "lut_combining_wrapper_on.synth.dcp": {
+            "luts": "  725 ",
+            "regs": "   38 ",
+            "carry8": "    0 ",
+            "dsps": "    0 ",
+            "iob": "  280 ",
+            "c_buf": "    1 "
+        }
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "X_date": [
+        "01-28-2021",
+        "01-07-2021",
+        "01-06-2021",
+        "01-08-2021",
+        "01-15-2021"
+    ],
+    "Y_name": [
+        "truePositive0SuccessTest()",
+        "trueNegative5Test()",
+        "trueNegative0FailTest()",
+        "truePositiveMaxTest()"
+    ],
+    "Cells": {
+        "trueNegative0FailTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        },
+        "trueNegative5Test()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        },
+        "truePositive0SuccessTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        },
+        "truePositiveMaxTest()": {
+            "01-06-2021": "Error: java.lang.NoClassDefFoundError",
+            "01-07-2021": "Pass",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Pass"
+        }
+    }
+}

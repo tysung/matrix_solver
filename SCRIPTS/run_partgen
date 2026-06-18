@@ -1,0 +1,17 @@
+#!/bin/bash
+. /export/tools/xilinx/10.1/ISE_DS/settings64.sh
+#. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+#partgen -arch virtexe
+#
+#partgen -p virtex5
+partgen -p xcv200fg456
+#partgen -p xc5vlx110tff1136
+#
+#partgen -v virtex5
+#partgen -v xc5vlx110t
+#partgen -v xc5vlx110tff1136
+#
+#cd /projects/cift-1/tsung/CIFT_GROUP/week/cift-internal
+./bin/query_resources --torc torc xcv100efg256-6
+#

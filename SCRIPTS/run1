@@ -1,0 +1,14 @@
+#!/usr/bin/bash -x
+#
+cd /run/media/user/VBox_GAs_6.1.38
+su << EOF
+admin_password
+whoami
+yum install gcc kernel-devel kernel-headers make bzip2 perl
+#rcvboxadd setup
+#sh ./VBoxLinuxAdditions.run
+usermod -aG vboxsf user
+
+EOF
+
+

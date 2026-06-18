@@ -1,0 +1,8 @@
+#!/bin/bash
+#export PERL5LIB=/nas/home/tsung/Downloads/perl_lib/lib/perl5
+export PERL5LIB=/nas/home/tsung/Downloads/Devel-Camelcadedb/lib:/nas/home/tsung/perl5/lib/perl5
+#
+perl excel.pl
+#perl -d:Camelcadedb adder4.pl
+#perl -d:ptkdb qa.pl
+

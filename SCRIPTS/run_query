@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+#/nas/home/tsung/CODE/sp6_cift-internal/installations/full/python/lib/python3.9/site-packages/cift_xilinx/ise/bin/query_resources xc7k70tfbg676-2 --torc=/opt/torc
+#
+#export LD_LIBRARY_PATH=torc/lib/:/lib/x86_64-linux-gnu
+cd ~/QUERY_RESOURCES
+./query_resources xc7k160tfbg676-2 --torc=./torc | sed -n 's/SLICE_X\([0-9]\+\)Y\([0-9]\+\)/\1 \2/p' | sort -n -k 1 
+#./query_resources xc7a200tffg1156-1 --torc=./torc | grep IOB_X 
+#./query_resources xc7k70tfbg676-2 --torc=./torc | grep SLICE_ 

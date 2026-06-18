@@ -1,0 +1,49 @@
+#
+# clone chipyard repo
+#
+#-- build host envionment from docker file in dockerfiles/Dockerfile
+cd chipyard/dockerfiles
+# docker will create conda env to build riscv_tools
+# create docker image
+docker build -t chipyard_base .
+#
+# run docker image chipyard_base
+#
+docker run -it chipyard_bas bash
+#
+# now, check the conda env
+# conda installation site: /opt/conda
+#
+conda --version
+conda install -n base conda-lock
+conda activate base
+#
+# now clone and setup chipyard repo
+#
+git clone https://github.com/ucb-bar/chipyard.git
+cd chipyard
+git checkout -b tysung_branch 1.8.1  # 1.8.1 is a stable tag version
+#
+# now build the riscv-tools - that we fail on grogu env
+# -- chipyard/.conda-env/riscv-tool  --- where $RISCV variable by Rocket_Chip
+# RISCV=/root/chipyard/.conda-env/riscv-tools
+# LD_LIBRARY_PATH=/root/chipyard/.conda-env/riscv-tools/lib
+# PATH=/root/chipyard/.conda-env/riscv-tools/bin:/root/chipyard/.conda-env/bin:/root/chipyard/software/firemarshal:/root/chipyard/bin:/opt/conda/condabin
+#  
+#
+./build-setup.sh riscv-tools
+#
+# clone rocket_chip repo
+#
+git clone https://github.com/ucb-bar/rocket-chip.git
+cd rocket-chip
+export ROCKETCHIP=`pwd`
+git submodule update --init
+export RISCV=/root/chipyard/.conda-env/riscv-tools
+cd vsim
+#
+# create Rocet_Chip verilog in "generated-src/freechips.rocketchip.system.DefaultConfig.v"
+make -j8  |& tee LOG.vsim
+# 
+# run VCS simulation. But, VCS not installed in this container
+# 

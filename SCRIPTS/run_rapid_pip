@@ -1,0 +1,15 @@
+#!/bin/bash -x
+#. /export/tools/xilinx/Vivado/2018.3/settings64.sh
+#
+export RAPIDWRIGHT_PATH=/opt/rapidwright/2020.2.5
+export RAPIDWRIGHT_PATH=/import/home/tsung/CODE/sp7_cift-internal/rapidwright/rapidwrigh
+#
+cd /import/home/tsung/CODE/sp7_cift-internal/temp/interconnect-xczu3eg-sfva625-1-e-2021-04-02T19-21-31/1-interconnect/init-00007/ 
+#
+java -cp .:/import/home/tsung/CODE/sp7_cift-internal/rapidwright/log4j-api-2.13.3.jar:/import/home/tsung/CODE/sp7_cift-internal/rapidwright/log4j-core-2.13.3.jar:/import/home/tsung/CODE/sp7_cift-internal/rapidwright/rapidwright-2019.1.2-standalone-lin64.jar:/import/home/tsung/CODE/sp7_cift-internal/code/main/ift/builders/interconnect/bin/RapidRouter.jar edu.isi.cift.PipFinder xczu3eg-sfva625-1-e /import/home/tsung/CODE/sp7_cift-internal/temp/interconnect-xczu3eg-sfva625-1-e-2021-04-02T19-21-31/1-interconnect/init-00007/testable-pips.txt /import/home/tsung/CODE/sp7_cift-internal/temp/interconnect-xczu3eg-sfva625-1-e-2021-04-02T19-21-31/1-interconnect/init-00007/unsupported-pips.txt /import/home/tsung/CODE/sp7_cift-internal/temp/interconnect-xczu3eg-sfva625-1-e-2021-04-02T19-21-31/1-interconnect/init-00007/inaccessible-pips.txt 40 79 79 40
+
+
+#!/usr/bin/bash
+#
+java -cp .:/nas/projects/cift/tysung/TEST_Q7/cift-internal/installations/full/python/lib/python3.9/site-packages/cift_xilinx/vivado_build/rapidwright/log4j-api-2.17.2.jar:/nas/projects/cift/tysung/TEST_Q7/cift-internal/installations/full/python/lib/python3.9/site-packages/cift_xilinx/vivado_build/rapidwright/log4j-core-2.17.2.jar:/nas/projects/cift/tysung/TEST_Q7/cift-internal/installations/full/python/lib/python3.9/site-packages/cift_xilinx/vivado_build/rapidwright/rapidwright-2020.2.5-standalone-lin64.jar:/nas/projects/cift/tysung/TEST_Q7/cift-internal/installations/full/python/lib/python3.9/site-packages/cift_xilinx/vivado_build/interconnect/bin/RapidRouter.jar edu.isi.cift.PipFinder xc7s25csga324-1 /nas/projects/cift/tysung/TEST_Q7/cift-internal/work/2022-05-24T11-11-27/1-interconnect/init-00049/testable-pips.txt /nas/projects/cift/tysung/TEST_Q7/cift-internal/work/2022-05-24T11-11-27/1-interconnect/init-00049/unsupported-pips.txt /nas/projects/cift/tysung/TEST_Q7/cift-internal/work/2022-05-24T11-11-27/1-interconnect/init-00049/inaccessible-pips.txt 90 101 104 90
+

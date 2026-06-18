@@ -1,0 +1,20 @@
+#!/bin/bash -x
+#
+CIFT_DIR=/nas/home/tsung/CODE/cift-internal_05_2024
+#CIFT_DIR=/nas/home/tsung/CODE/cift-internal_feb2024
+#TORC_DIR=/nas/home/tsung/CODE/torc-internal_ice40
+TORC_DIR=/opt/torc/ice40
+export LD_LIBRARY_PATH=$TORC_DIR/lib/:/lib/x86_64-linux-gnu
+#
+cd $CIFT_DIR 
+export PATH=$CIFT_DIR/venv/lib/python3.9/site-packages/torc/bin:$PATH
+#
+query_resources --torc=$TORC_DIR ice40lp-4k-sg48 
+#query_resources --torc=$TORC_DIR ice40lp-384-cm36 
+#query_resources --torc=$TORC_DIR ice40lp-8k-sg48 
+#query_resources --torc=$TORC_DIR ice40up-5k-sg48 
+#query_resources --torc=$TORC_DIR ice40lp-1k-cm36 
+#query_resources --torc=/opt/torc/ice40 lfe5um5g-85f-8bg381c 
+#query_resources --torc=/opt/torc/ice40 LFE5U-45F-6BG381C 
+#query_resources --torc=/opt/torc/ice40 xc7k70tfbg484
+#./query_resources --torc=/nas/home/tsung/CODE/torc-internal xc7z030sbg485

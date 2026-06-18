@@ -1,0 +1,12 @@
+#!/bin/bash
+. /export/tools/xilinx/10.1/ISE_DS/settings64.sh
+#. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+#xdl -ncd2xdl harness.ncd
+#
+xdl -xdl2ncd harness.xdl
+#
+#which ise
+#
+ngc2edif
+

@@ -1,0 +1,14 @@
+#!/bin/bash -x
+#
+export HSP_HOME=/export/tools/synopsys/hspice
+export PATH=$HSP_HOME/bin:$PATH
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu:3000@rcg-lic.ads.isi.edu:7788@rcg-lic.ads.isi.edu
+export HSPICE_64=1
+#
+WORKDIR=/nas/home/tsung/ADS_TEST
+cd $WORKDIR
+#cp -rf $HSP_HOME/demo/hspice/mos .
+#
+#hspice64
+hspice64 -i my_nmos_dc_TT_nfet_dc_iv.hsp -m 4G -o outfile
+#

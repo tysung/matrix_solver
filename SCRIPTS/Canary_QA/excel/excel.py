@@ -1,0 +1,407 @@
+#!/home/tsung/Canary_QA/venv/bin/python3.6
+#
+import os
+import re
+import json
+import xlsxwriter
+from datetime import datetime
+#
+#
+qa_golden_dir = "/home/tsung/Canary_QA/excel/JSON"
+date = datetime.now().strftime("%m-%d-%Y")
+today_excel = date + '_db.xlsx'
+db_f = 'golden.json'
+
+def x_compare(x1):
+    m1 = re.match(r'(.*)-(.*)-(.*)', x1)
+    v1 = int(m1.group(3))*365+int(m1.group(1))*30+int(m1.group(2))
+    return(v1)
+
+def read_db(db_file, X_name):
+
+    ## now, read in $db
+    db = {X_name:[], 'Y_name':[], 'Cells':{}}
+    if os.path.exists(db_file):
+        with open(db_file) as f:
+            db = json.load(f)
+        #
+        # consolidate {X,Y} elements
+        #
+        db[X_name] = list(set(db[X_name]))
+        db[X_name].sort(reverse=True)
+        #
+        db['Y_name'] = list(set(db['Y_name']))
+        db['Y_name'].sort()
+        #
+    return(db)
+
+def main(qa_golden_dir, today_exel, f_all_db):
+    
+    pwd = os.getcwd()
+
+    os.chdir(qa_golden_dir)
+
+    #db_file = qa_golden_dir + '/' + f_all_db
+    report_db = read_db(f_all_db, 'X_rsce')
+
+    # Create a new workbook and add a worksheet
+    xlsx_out = qa_golden_dir + '/' + today_exel
+    workbook  = xlsxwriter.Workbook(xlsx_out)
+    worksheet = workbook.add_worksheet('All Tests')
+    fmt_wb = excel_wb_format(workbook)
+    write_excel_sheet(workbook, worksheet, fmt_wb, report_db, 'X_rsce')
+    #
+    #for Y_name in (all_db['Y_name']):
+    #    m = re.match(r'(.*):(.*)', Y_name)
+    #    family = m.group(1)
+    #    type = m.group(2)
+    #    #
+    #    os.chdir(family + '/' + type)
+    #    db_file = "./data.json"
+    #    type_db = read_db(db_file) 
+    #    worksheet = workbook.add_worksheet(family + '_' + type)
+    #    write_excel_sheet(workbook, worksheet, fmt_wb, type_db)
+    #    #
+    #    os.chdir("../..")
+    
+    workbook.close()
+
+    os.chdir(pwd)
+
+def write_report_excel(qa_golden_dir, today_exel, f_db):
+    
+    pwd = os.getcwd()
+
+    os.chdir(qa_golden_dir)
+
+    #db_file = qa_golden_dir + '/' + f_db
+    report_db = read_db(f_db, 'X_rsce')
+
+    # Create a new workbook and add a worksheet
+    xlsx_out = today_exel
+    workbook  = xlsxwriter.Workbook(xlsx_out)
+    worksheet = workbook.add_worksheet('All Tests')
+    fmt_wb = excel_wb_format(workbook)
+    write_excel_sheet(workbook, worksheet, fmt_wb, report_db, 'X_rsce')
+    #
+    # category options/wrapper into a group
+    #
+    #for Y_name in (all_db['Y_name']):
+    #    m = re.match(r'(.*):(.*)', Y_name)
+    #    family = m.group(1)
+    #    type = m.group(2)
+    #    #
+    #    os.chdir(family + '/' + type)
+    #    db_file = "./data.json"
+    #    type_db = read_db(db_file) 
+    #    worksheet = workbook.add_worksheet(family + '_' + type)
+    #    write_excel_sheet(workbook, worksheet, fmt_wb, type_db)
+    #    #
+    #    os.chdir("../..")
+    
+    workbook.close()
+
+    os.chdir(pwd)
+
+def collect_xml(class_db):
+
+    pass_count = 0
+    fail_count = 0
+    error_count = 0
+    for ts_name in class_db.keys():
+        result = class_db[ts_name]
+        f_pass = re.search('Pass', result)
+        if f_pass:
+            pass_count = pass_count + 1
+
+        f_fail = re.search('Fail', result)
+        if f_fail:
+            fail_count = fail_count + 1
+        else:
+            f_error = re.search('Error', result)
+            if f_error:
+                error_count = error_count + 1
+
+    text = ''
+    if fail_count > 0:
+        text = text + 'Fail:' + str(fail_count) + " "
+    if error_count > 0:
+        text = text + 'Error:' + str(error_count) + " "
+    if pass_count > 0:
+        text = text + 'Pass:' + str(pass_count) + " "
+
+    return(text)
+
+
+def write_all_xml_excel(today_exel, date, xml_db):
+    
+    pwd = os.getcwd()
+
+    os.chdir('Golden')
+
+    # Create a new workbook and add a worksheet
+    xlsx_out = today_exel
+    workbook  = xlsxwriter.Workbook(xlsx_out)
+    all_worksheet = workbook.add_worksheet('Unit Tests')
+    fmt_wb = excel_wb_format(workbook)
+    #
+    #date = '12-27-2020'
+    #
+    group_dic = {}
+    for classname in (sorted(xml_db.keys())):
+        db = {'X_date':[], 'Y_name':[], 'Cells':{}}
+        words = classname.split('.')
+        group_name = words[6]
+        if len(group_name) > 30:
+            x_name = group_name
+            group_name = x_name[0:29]
+        group_dic[group_name] = classname
+        db_file = 'DB/' + f'{group_name}.json'
+        if os.path.exists(db_file):
+            with open(db_file) as f:
+                db = json.load(f)
+            f.close()
+        db['X_date'].append(date)
+        db['X_date'] = list(set(db['X_date']))
+        for Y_name in (sorted(xml_db[classname].keys())):
+            db['Y_name'].append(Y_name)
+            if Y_name not in db['Cells']:
+                db['Cells'][Y_name] = {}
+            db['Cells'][Y_name][date] = xml_db[classname][Y_name]
+        db['Y_name'] = list(set(db['Y_name']))
+        with open(db_file, "w") as outfile:
+            json.dump(db, outfile, indent = 4)
+        outfile.close()
+        worksheet = workbook.add_worksheet(group_name)
+        write_excel_sheet(workbook, worksheet, fmt_wb, db, 'X_date')
+
+    db = {'X_date':[], 'Y_name':[], 'Cells':{}}
+    db_file = 'all_db.json'
+    if os.path.exists(db_file):
+        with open(db_file) as f:
+            db = json.load(f)
+        f.close()
+    db['X_date'].append(date)
+    db['X_date'] = list(set(db['X_date']))
+    group_list = list(group_dic.keys())
+    db['Y_name'] = list(set(db['Y_name']+group_list))
+    for y_name in group_dic.keys():
+        if y_name not in db['Cells']:
+            db['Cells'][y_name] = {}
+        classname = group_dic[y_name]
+        db['Cells'][y_name][date] = collect_xml(xml_db[classname])
+
+    with open(db_file, "w") as outfile:
+        json.dump(db, outfile, indent = 4)
+    outfile.close()
+    #
+    write_excel_sheet(workbook, all_worksheet, fmt_wb, db, 'X_date')
+    #
+    workbook.close()
+
+    os.chdir(pwd)
+
+
+def write_all_excel(dcp_files, today_exel, date, rpt_db):
+    
+    pwd = os.getcwd()
+
+    os.chdir('DB')
+
+    # Create a new workbook and add a worksheet
+    xlsx_out = today_exel
+    workbook  = xlsxwriter.Workbook(xlsx_out)
+    all_worksheet = workbook.add_worksheet('All Tests')
+    fmt_wb = excel_wb_format(workbook)
+    #write_report_excel('./DB', today_excel, "db.json")
+    report_db = read_db("db.json", 'X_rsce')
+    worksheet = workbook.add_worksheet('Canary Report')
+    write_excel_sheet(workbook, worksheet, fmt_wb, report_db, 'X_rsce')
+    #
+    # category options/wrapper into a group
+    (all_db, rpt_db) = data_group(dcp_files, rpt_db)
+    #date = '12-27-2020'
+    #
+    for group_name in (sorted(all_db.keys())):
+        db = {'X_date':[], 'Y_name':[], 'Cells':{}}
+        db_file = f'{group_name}.json'
+        if os.path.exists(db_file):
+            with open(db_file) as f:
+                db = json.load(f)
+            f.close()
+        db['X_date'].append(date)
+        db['X_date'] = list(set(db['X_date']))
+        for file_name in (sorted(all_db[group_name].keys())):
+            for rsce in (sorted(all_db[group_name][file_name]['resource'].keys())):
+                name = all_db[group_name][file_name]['name']
+                Y_name = name + '::' + rsce
+                db['Y_name'].append(Y_name)
+                if Y_name not in db['Cells']:
+                    db['Cells'][Y_name] =  {}
+                db['Cells'][Y_name][date] = all_db[group_name][file_name]['resource'][rsce]
+        db['Y_name'] = list(set(db['Y_name']))
+        with open(db_file, "w") as outfile:
+            json.dump(db, outfile, indent = 4)
+        outfile.close()
+        worksheet = workbook.add_worksheet(group_name)
+        write_excel_sheet(workbook, worksheet, fmt_wb, db, 'X_date')
+
+    db = {'X_date':[], 'Y_name':[], 'Cells':{}}
+    db_file = 'all_db.json'
+    if os.path.exists(db_file):
+        with open(db_file) as f:
+            db = json.load(f)
+        f.close()
+    db['X_date'].append(date)
+    db['X_date'] = list(set(db['X_date']))
+    db['Y_name'] = list(set(db['Y_name']+rpt_db['Y_name']))
+    for y_name in rpt_db ['Y_name']:
+        if y_name not in db['Cells']:
+            db['Cells'][y_name] = {}
+        db['Cells'][y_name][date] = rpt_db['Cells'][y_name]
+
+    with open(db_file, "w") as outfile:
+        json.dump(db, outfile, indent = 4)
+    outfile.close()
+    #
+    for y_name in db['Y_name']:
+        for x_date in db['X_date']:
+            [ f_pass, f_fail, f_none, f_new ] = db['Cells'][y_name][x_date]
+            db['Cells'][y_name][x_date] = ''
+            if f_fail != 0:
+                db['Cells'][y_name][x_date] = db['Cells'][y_name][x_date] + "Fail: " + str(f_fail) + "  "
+            if f_none != 0:
+                db['Cells'][y_name][x_date] = db['Cells'][y_name][x_date] + "None: " + str(f_none) + "  "
+            if f_pass != 0:
+                db['Cells'][y_name][x_date] = db['Cells'][y_name][x_date]  + "Pass: " + str(f_pass) + "  "
+            if f_new != 0:
+                db['Cells'][y_name][x_date] = db['Cells'][y_name][x_date]  + "Pass: " + str(f_new) + "  "
+
+    write_excel_sheet(workbook, all_worksheet, fmt_wb, db, 'X_date')
+    #
+    workbook.close()
+
+    os.chdir(pwd)
+
+def data_group(dcp_files, rpt_db):
+
+    option_db = {} # key: option_name
+    for Y_name in (sorted(rpt_db['Y_name'])):
+        m = re.match(r'(.*)\.(synth.dcp)', Y_name)
+        name = m.group(1)
+        #f_wrapper = -1 
+        f_wrapper = re.search('wrapper', name)
+        if f_wrapper:
+            option_name = name[:f_wrapper.start()-1]
+            option_vlue = name[f_wrapper.end()+1:]
+        else:
+            words = re.split("_", name)
+            option_name = "_".join(words[:-1])
+            option_vlue = "_".join(words[-1:])
+        #print(f'option_name = {option_name}, option_vlue = {option_vlue}')
+        if option_name not in option_db:
+            option_db[option_name] = {}
+        if Y_name not in option_db[option_name]:
+            option_db[option_name][Y_name] = {'name': name, 'value':option_vlue, 'wrapper':f_wrapper!=None}
+            if Y_name in dcp_files:
+                option_db[option_name][Y_name]['resource'] = dcp_files[Y_name]['resource']
+
+    # update rpt_db based on grouping from db
+    all_db = {'Y_name':[], 'Cells':{}}
+    all_db['Y_name'] = sorted(option_db.keys())
+    for option_name in (sorted(option_db.keys())):
+        count_pass = 0
+        count_fail = 0
+        count_new = 0
+        count_none = 0
+        for Y_name in sorted(option_db[option_name].keys()):
+            if rpt_db['Cells'][Y_name] == "Pass":
+                count_pass = count_pass + 1
+            elif rpt_db['Cells'][Y_name] == "Fail":
+                count_fail = count_fail + 1
+            elif rpt_db['Cells'][Y_name] == "None":
+                count_none = count_none + 1
+            elif rpt_db['Cells'][Y_name] == "New":
+                count_new = count_new + 1
+
+        all_db['Cells'][option_name] = [count_pass, count_fail, count_none, count_new]
+
+    return(option_db, all_db)
+
+def excel_wb_format(workbook):
+
+    fmt_wb = {}
+    fmt_wb['bold'] = workbook.add_format( {'bold':1, 'size':16} )
+    fmt_wb['size'] = workbook.add_format( {'size':16} )
+    fmt_wb['center'] = workbook.add_format( {'align':'center', 'size':16} )
+    fmt_wb['header'] = workbook.add_format( {'bold':1, 'size':16, 'align':'center'} )
+    # Light red fill with dark red text.
+    fmt_wb['format_red'] = workbook.add_format({'bold':1,'color':'red','size':16,'align':'center'})
+    fmt_wb['format_blue'] = workbook.add_format({'color':'blue','size':16,'align':'center'})
+    return(fmt_wb)
+
+
+def write_excel_sheet(workbook, worksheet, fmt_wb, db, X_name):
+
+    # Expand the first columns so that the date is visible.
+    worksheet.set_column( "A:A", 30 )
+    worksheet.set_column( "B:K", 20 )
+    
+    # Write the column headers
+    worksheet.write( 'A1', 'Option_Test', fmt_wb['bold'] )
+    hd = 'A'
+    col = 1
+    cell_name = ''
+    if X_name == 'X_date':
+        X_list = sorted(db[X_name], key=x_compare, reverse=True)
+    else:
+        X_list = sorted(db[X_name], reverse=True)
+
+    for x_name in (X_list):
+        hd = chr(ord(hd)+1)
+        cell_name = hd + str(col)
+        worksheet.write( cell_name, x_name, fmt_wb['header'] )
+    
+    for Y_name in (sorted(db['Y_name'])):
+        col += 1
+        hd = 'A'
+        cell_name = hd + str(col)
+        worksheet.write(cell_name, Y_name, fmt_wb['size'])
+
+        for x_name in (X_list):
+            hd = chr(ord(hd)+1)
+            cell_name = hd + str(col)
+            result = db['Cells'][Y_name].get(x_name, None)
+
+            if result is None:
+                worksheet.write(cell_name, 'N.A.', fmt_wb['center'])
+            elif 'Fail' in result:
+                sheet = Y_name
+                #if X_name == 'X_srce':
+                #    sheet = 'Canary Report'
+                range = hd + "2"
+                sheet = sheet.replace( ':', '_' )
+                worksheet.write_url(cell_name, f'internal:{sheet}!{range}', fmt_wb['format_red'], db['Cells'][Y_name][x_name])
+            elif 'Error' in result:
+                sheet = Y_name
+                range = hd + "2"
+                sheet = sheet.replace( ':', '_' )
+                worksheet.write_url(cell_name, f'internal:{sheet}!{range}', fmt_wb['format_blue'], db['Cells'][Y_name][x_name])
+            elif 'New:' in result:
+                sheet = Y_name
+                range = hd + "2"
+                sheet = sheet.replace( ':', '_' )
+                worksheet.write_url(cell_name, f'internal:{sheet}!{range}', fmt_wb['format_blue'], db['Cells'][Y_name][x_name])
+            elif 'new' == result:
+                worksheet.write(cell_name, db['Cells'][Y_name][x_name],['format_blue'])
+            elif 'new_fl' == result:
+                worksheet.write(cell_name, db['Cells'][Y_name][x_name], fmt_wb['format_red'])
+            elif 'none' == result:
+                worksheet.write(cell_name, db['Cells'][Y_name][x_name], fmt_wb['format_red'])
+            else:
+                worksheet.write(cell_name, db['Cells'][Y_name][x_name], fmt_wb['center'])
+    
+if __name__ == '__main__':
+    main(qa_golden_dir, today_excel, db_f)
+    #main(sys.argv[1:])
+

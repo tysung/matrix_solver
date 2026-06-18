@@ -1,0 +1,80 @@
+#!/bin/bash -x
+VM_NAME = "vbox_2_rocky8"
+VM_SSH_PORT = "22"
+#
+vboxmanage controlvm $VM_NAME poweroff || true
+#
+#vboxmanage internalcommands sethduuid cift-rocky-deploy.vdi
+#vboxmanage storageattach $VM_NAME --storagectl SATA --port 1 --medium cift-rocky-deploy.vdi --type hdd
+#
+vboxmanage startvm $VM_NAME --type=headless
+ssh user@127.0.0.1 -p$VM_SSH_PORT "echo \"wait for boot\""
+vboxmanage sharedfolder add $VM_NAME --name=ci --hostpath=$CI_PROJECT_DIR --transient
+ssh user@127.0.0.1 -p$VM_SSH_PORT "echo user | sudo -S mount $VM_CONFIG_DEV /media/vm-configs"
+ssh user@127.0.0.1 -p$VM_SSH_PORT "/media/vm-configs/init.sh"
+#
+vboxmanage controlvm $VM_NAME poweroff  || true
+#
+#vboxmanage storageattach $VM_NAME --storagectl SATA --port 1 --medium none || true
+#-vboxmanage closemedium disk cift-rocky-full.vdi || true
+#
+   before_script:
+        - echo $CI_RUNNER_DESCRIPTION
+        - echo $VM_NAME
+        - vboxmanage controlvm $VM_NAME poweroff || true
+        - vboxmanage internalcommands sethduuid cift-rocky-full.vdi
+        - vboxmanage storageattach $VM_NAME --storagectl SATA --port 1 --medium cift-rocky-full.vdi --type hdd
+        - vboxmanage startvm $VM_NAME --type=headless
+        - ssh user@127.0.0.1 -p$VM_SSH_PORT "echo \"wait for boot\""
+        - vboxmanage sharedfolder add $VM_NAME --name=ci --hostpath=$CI_PROJECT_DIR --transient
+        - vboxmanage sharedfolder add $VM_NAME --name=opt --hostpath=$OPT_DIR --transient
+        - ssh user@127.0.0.1 -p$VM_SSH_PORT "echo user | sudo -S mount $VM_CONFIG_DEV /media/vm-configs"
+        - ssh user@127.0.0.1 -p$VM_SSH_PORT "/media/vm-configs/init.sh"
+    script:
+        - echo ${CI_PROJECT_DIR}
+        - echo $PWD
+        - ssh user@127.0.0.1 -p $VM_SSH_PORT "cd /media/sf_ci/;
+            mkdir /opt/cift/sources;
+            cp -r /media/opt/sources/nextpnr-lattice-4f0a923d /opt/cift/sources/;
+            cp -r /media/opt/sources/yosys-733df3fa.tar.bz2 /opt/cift/sources/;
+            cp -r /media/opt/sources/prjtrellis-c230a0a1.tar.xz /opt/cift/sources/;
+            cp -r /media/opt/sources/openFPGALoader-v0.12.1.tar.gz /opt/cift/sources/;
+            cp -r /media/opt/sources/urjtag-2021.03.tar.xz /opt/cift/sources/;
+            cp -r /media/opt/sources/lift-q2-source.tar.gz /opt/cift/sources/;
+            mv build/installer cift-installer-full;
+            tar cJf cift-installer-full.tar.xz cift-installer-full"
+        - vboxmanage controlvm $VM_NAME poweroff || true
+        - vboxmanage storageattach $VM_NAME --storagectl SATA --port 1 --medium none || true
+        - tar cJf $CIFT_RELEASE/cift-rock-full.tar.xz cift-rocky-full.vdi
+        - mv cift-installer-full.tar.xz $CIFT_RELEASE/
+    after_script:
+        - vboxmanage controlvm $VM_NAME poweroff || true
+        - vboxmanage storageattach $VM_NAME --storagectl SATA --port 1 --medium none || true
+        - vboxmanage closemedium disk cift-rocky-full.vdi || true
+
+#
+#!/bin/bash
+
+# Create VM
+VBoxManage createvm --name "MyVM" --ostype "Ubuntu_64" --register
+
+# Modify VM settings
+VBoxManage modifyvm "MyVM" --memory 2048 --vram 128 --acpi on --boot1 dvd --nic1 nat
+
+# Create virtual disk
+VBoxManage createhd --filename "MyVM_Disk.vdi" --size 20000
+
+# Add SATA controller and attach virtual disk
+VBoxManage storagectl "MyVM" --name "SATA Controller" --add sata --controller IntelAHCI
+VBoxManage storageattach "MyVM" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium "MyVM_Disk.vdi"
+
+# Attach ISO image
+VBoxManage storageattach "MyVM" --storagectl "SATA Controller" --port 1 --device 0 --type dvddrive --medium "/path/to/ubuntu.iso"
+
+# Start VM
+VBoxManage startvm "MyVM" --type headless
+
+# Example of running a job (this part requires SSH to be set up on the VM)
+# ssh user@vm_ip_address 'echo "Hello, World!" > /home/user/hello.txt'
+
+

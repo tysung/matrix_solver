@@ -1,0 +1,17 @@
+#!/bin/bash -x
+export CXX=/usr/bin/g++-8
+export LD_LIBRARY_PATH=/opt/boost/boost-1.76.0/lib
+#
+./install <<EOF
+
+./installations/full
+Y
+
+Y
+Y
+n
+/opt/cmake/cmake-3.20/bin/cmake
+
+
+EOF
+

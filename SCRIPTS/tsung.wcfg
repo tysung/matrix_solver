@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="./isim.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_textio" />
+            <top_module name="test_constants_pkg" />
+            <top_module name="testbench" />
+            <top_module name="textio" />
+            <top_module name="vcomponents" />
+            <top_module name="vital_primitives" />
+            <top_module name="vital_timing" />
+            <top_module name="vpkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="11" />
+   <wvobject fp_name="/testbench/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/pass" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">pass</obj_property>
+      <obj_property name="ObjectShortName">pass</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/harness/test_region_i/tpg_i1_0/state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/harness/test_region_i/tpg_i1_0/driver_u" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">driver_u[2:0]</obj_property>
+      <obj_property name="ObjectShortName">driver_u[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/harness/test_region_i/tpg_i1_0/amux" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">amux</obj_property>
+      <obj_property name="ObjectShortName">amux</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/harness/test_region_i/tpg_i1_0/driver_e" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">driver_e[7:0]</obj_property>
+      <obj_property name="ObjectShortName">driver_e[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/harness/test_region_i/SLICE_X1Y0_check/expected" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">expected[7:0]</obj_property>
+      <obj_property name="ObjectShortName">expected[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/harness/test_region_i/SLICE_X1Y0_check/actual" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">actual[7:0]</obj_property>
+      <obj_property name="ObjectShortName">actual[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="group8" type="group">
+      <obj_property name="label">PLB</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/testbench/harness/test_region_i/SLICE_X1Y0/slicel_i/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/harness/test_region_i/SLICE_X1Y0/slicel_i/a6" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">a6</obj_property>
+         <obj_property name="ObjectShortName">a6</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/harness/test_region_i/SLICE_X1Y0/slicel_i/sr" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sr</obj_property>
+         <obj_property name="ObjectShortName">sr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/harness/test_region_i/SLICE_X1Y0/slicel_i/ce" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ce</obj_property>
+         <obj_property name="ObjectShortName">ce</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/testbench/harness/test_region_i/SLICE_X1Y0/slicel_i/aq" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">aq</obj_property>
+      <obj_property name="ObjectShortName">aq</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/harness/test_region_i/SLICE_X1Y0/slicel_i/amux" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">amux</obj_property>
+      <obj_property name="ObjectShortName">amux</obj_property>
+   </wvobject>
+</wave_config>

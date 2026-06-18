@@ -1,0 +1,8 @@
+#
+# Copy to the direcotry for board testing on different machine
+#
+rcp -r virtex6 rcg-fpga-host:/ift/tsung/CIFT_WEEK/week/cift-internal/RESULT/
+#
+# scp xxx.file user@remote_server:/users/yourname
+# scp -P 52108 tsung@yoda:/projects/cift-1/centos.zip .
+#

@@ -1,0 +1,24 @@
+#!/bin/bash -x
+#. /export/tools/xilinx/10.1/ISE_DS/settings64.sh
+. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+cift="/nas/home/tsung/CODE/sp6_cift-internal"
+dir="${cift}/temp/all-brams-xc6slx45csg484-3-2021-08-03T18-44-48/1-marchx_512x36_dp/build-00000"
+#
+cd ${dir}
+#
+#xst -ifn ${dir}/harness.xst
+#
+#ngdbuild -sd ${dir}/slice -sd ${dir} -uc ${cift}/interfaces/bscanv1/io_wrapper.ucf ${dir}/harness.ngd
+#
+map -w -o ${dir}/harness_placed.ncd ${dir}/harness.ngd 
+#map -w -u -logic_opt off -register_duplication off -ir off -o ${dir}/harness_placed.ncd ${dir}/harness.ngd 
+#
+par -w ${dir}/harness_placed.ncd ${dir}/harness.ncd ${dir}/harness_placed.pcf
+#
+#xdl -ncd2xdl harness.ncd
+#
+#xdl -xdl2ncd luts1-0.xdl 
+#
+#bitgen -w -d -m -g ReadBack ${dir}/harness.ncd ${dir}/harness.bit ${dir}/harness_placed.pcf
+#

@@ -1,0 +1,20 @@
+#!/bin/bash
+. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+#trce -e 10 harness.ncd harness_placed.pcf
+trce -v 12 -fastpaths -o design_timing_report harness.ncd harness_placed.pcf 
+#trce -v 10 -u 10 -a luts1-0.ncd
+#
+# dump VCD to output.vcd
+#
+#    15  restart
+#    16  dumpfile output.vcd
+#    17  vcd dumpfile output.vcd
+#    18  vcd dumpvars -m UUT -l 2
+#    19  run 5.00us
+#    20  run 5.00us
+#    21  run 5.00us
+#    22  run 5.00us
+#    23  vcd dumpflush
+#
+

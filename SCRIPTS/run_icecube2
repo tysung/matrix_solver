@@ -1,0 +1,24 @@
+#!/usr/bin/bash
+##
+export LM_LICENSE_FILE=7788@rcg-lic.ads.isi.edu
+export FOUNDRY=/opt/lscc/iCEcube2/LSE
+export SBT_DIR=/opt/lscc/iCEcube2/sbt_backend
+export LD_LIBRARY_PATH=/opt/lscc/iCEcube2/LSE:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/opt/lscc/iCEcube2/LSE/bin/lin64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/opt/lscc/iCEcube2/sbt_backend/lib/linux/opt:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/opt/lscc/iCEcube2/sbt_backend/bin/linux/opt/synpwrap:$LD_LIBRARY_PATH
+#
+# Open iCEcube2 GUI
+#
+/opt/lscc/iCEcube2/iCEcube2 
+#
+exit
+# Synthesis
+#
+cd /home/user/LATTICE/iCEcube2
+/opt/lscc/iCEcube2/LSE/bin/lin64/synthesis -f syn_lse.prj
+#
+# Run backend using the ICEcube2_flow.tcl based on user guide 
+#
+tclsh iCEcube2_flow.tcl
+

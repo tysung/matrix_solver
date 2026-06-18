@@ -1,0 +1,20 @@
+#!/bin/bash -x 
+#
+export RISCV=/projects/chipyard/.conda-env/riscv-tools
+export LD_LIBRARY_PATH=/projects/chipyard/.conda-env/riscv-tools/lib
+export PATH=$RISCV/bin:$RISCV/../bin:/projects/chipyard/software/firemarshal:/projects/chipyard/bin:$PATH
+#
+export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+export PATH=$VCS_HOME/bin:$PATH
+export VERDI_HOME=/export/tools/synopsys/vc_static/R-2020.12/verdi
+#
+cd ~/Trebuchet/rocket-chip
+export ROCKETCHIP=`pwd`
+#
+cd vsim
+rm -rf simv-free*
+make debug
+#
+./simv-freechips.rocketchip.system-DefaultConfig-debug -verdi &
+#./simv-freechips.rocketchip.system-DefaultConfig +vcs+finish+100
+#

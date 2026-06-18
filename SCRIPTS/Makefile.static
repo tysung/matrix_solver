@@ -1,0 +1,83 @@
+# Copyright (C) 2017-2020 University of Southern California 
+#
+# Usage: make -f Makefile.static build_prjxray brace_db all
+#        make -f Makefile.static brace_checker-XADC_TEST
+#
+SHELL = bash
+
+#XRAY_VIVADO_SETTINGS := /opt/Xilinx/Vivado/2017.2/settings64.sh
+
+# Check if root
+ifeq ($(shell id -u),0)
+        $(error ERROR: Running as ID 0)
+endif
+
+# Tools + Environment
+PRJXRAY_ENV = cd prjxray; source settings/kintex7.sh;
+DB_ENV = $(PRJXRAY_ENV) pip install dataclasses; pip install click; cd ../code/python/brace;
+BRACE_ENV = $(PRJXRAY_ENV) cd ../code/python/brace;
+
+bit2fasm:
+	$(PRJXRAY_ENV) cd cicd-test; $$XRAY_BIT2FASM top_mult.bit | tee ./top_mult.fasm
+
+build_prjxray:
+	#mkdir -p build
+	cd prjxray; $(MAKE) build env # db-prepare-kintex7
+	cd prjxray; ./download-latest-db.sh
+
+brace_db: build_prjxray
+	$(DB_ENV) python3 brace-db-generator.py ./undoc_db_descriptor.yaml brace-db/
+
+fasm2bit: create_prjxray_link 
+	# Install project dependencies
+	$(BRACE_ENV) python3 brace-assembler.py --db-root2 ./brace-db -f cicd-test/top_mult.fasm -o cicd-test/top_mult.frm --format frm
+	$(BRACE_ENV) $$XRAY_TOOLS_DIR/xc7frames2bit -frm_file cicd-test/top_mult.frm -output_file cicd-test/top_mult.fasm.bit -part_file $$XRAY_PART_YAML -part_name $$XRAY_PART
+
+static_check: create_prjxray_link 
+	$(BRACE_ENV) python3 brace-checker.py --xray-db ../../../prjxray/database/kintex7 --brace-db ./brace-db -o output.txt cicd-test/top_mult.fasm.bit  |& tee LOG.checker
+
+create_prjxray_link:
+	$(BRACE_ENV) ln -f -s ../../../prjxray/cicd-test cicd-test 
+
+create_link:
+	$(BRACE_ENV) ln -f -s ../../../qa_test cicd-test 
+
+#
+# Targets related to Project IP bitfiles
+# --------------------------------------
+MULT_IP=top_mult top_mult.fasm
+XADC_IP=XADC_TEST
+FIFO_IP=vivado_fifo_18k_1kx18 vivado_fifo_36k_8kx4 
+BRAM_IP=vivado_marchb_32kx1  vivado_marchx_cascade_dp vivado_marchx_16kx1
+#ICAP_IP=ICAP
+
+#XRAY_IP= ${FIFO_IP} 
+XRAY_IP=${MULT_IP} ${XADC_IP} ${BRAM_IP} ${FIFO_IP} 
+
+define brace_checker
+
+# $(1): IP bit file to be used
+
+brace_checker-$(1): create_link
+	$(BRACE_ENV) python3 brace-checker.py --xray-db ../../../prjxray/database/kintex7 --brace-db ./brace-db -o cicd-test/$(1).result cicd-test/$(1).bit |& tee cicd-test/$(1).log
+
+endef
+
+$(foreach IP,$(XRAY_IP),$(eval $(call brace_checker,$(IP))))
+
+#$(foreach test,$(TESTS),$(test)_clean)
+#
+all_checker: $(foreach IP,$(XRAY_IP), brace_checker-$(IP))
+
+all: brace_db all_checker
+
+print-%:
+	echo $* = $($*)
+
+clean:
+	rm -f qa_test/*.{log,result}
+	$(DB_ENV) rm -rf brace-db cicd-test
+	cd prjxray; make clean
+
+.PHONY: clean
+

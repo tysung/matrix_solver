@@ -1,0 +1,20 @@
+set_global_assignment -name TOP_LEVEL_ENTITY slicel
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 21.4.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:59:12  APRIL 07, 2022"
+set_global_assignment -name LAST_QUARTUS_VERSION "21.4.0 Pro Edition"
+set_global_assignment -name FAMILY "Stratix 10"
+set_global_assignment -name DEVICE 1SG10MHN3F74E2LG_U1
+set_global_assignment -name VHDL_FILE slice_luts1.vhd
+set_location_assignment LABCELL_X334_Y120_N9 -to LUT_F1
+set_location_assignment LABCELL_X334_Y120_N6 -to LUT_F0
+set_location_assignment FF_X334_Y120_N11 -to FF_1
+set_location_assignment FF_X334_Y120_N8 -to FF_0
+set_global_assignment -name EDA_DESIGN_ENTRY_SYNTHESIS_TOOL "Synplify Pro"
+set_global_assignment -name EDA_LMF_FILE synplcty.lmf -section_id eda_design_synthesis
+set_global_assignment -name EDA_INPUT_DATA_FORMAT VQM -section_id eda_design_synthesis
+set_global_assignment -name EDA_SIMULATION_TOOL "Questa Intel FPGA (Verilog)"
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name FLOW_ENABLE_EDA_NETLIST_WRITER ON
+set_instance_assignment -name PARTITION_COLOUR 4282055935 -to slicel -entity slicel
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name POWER_APPLY_THERMAL_MARGIN ADDITIONAL

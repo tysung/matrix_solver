@@ -1,0 +1,137 @@
+{
+    "edu.gtri.cosmic_canary.options.synthesis.design.BufgTest": {
+        "truePositiveInfer9()": "Pass",
+        "trueNegativeInter()": "Pass",
+        "truePositiveNoInference()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.ControlSetOptThresholdTest": {
+        "directInferredTest()": "Pass",
+        "threshold51fanout50Test()": "Pass",
+        "threshold50fanout50Test()": "Pass",
+        "threshold16Test()": "Pass",
+        "directTest()": "Pass",
+        "threshold0Test()": "Pass",
+        "threshold5Test()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.FlattenHierarchyTest": {
+        "fullHierarchicalTest()": "Pass",
+        "rebuiltFlatTest()": "Pass",
+        "noneFlatTest()": "Pass",
+        "rebuiltHierarchicalTest()": "Pass",
+        "fullFlatTest()": "Pass",
+        "noneHierarchicalTest()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.GatedClockConversionTest": {
+        "basicGatesOnNegativeTest()": "Pass",
+        "basicGatesOffPositiveTest()": "Pass",
+        "basicGatesOffNegativeTest()": "Pass",
+        "registeredGatesOnPositiveTest()": "Pass",
+        "registeredGatesOnNegativeTest()": "Pass",
+        "registeredGatesOffPositiveTest()": "Pass",
+        "registeredGatesOffNegativeTest()": "Pass",
+        "basicGatesOnPositiveTest()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.KeepEquivRegsTest": {
+        "directInferredTest()": "Pass",
+        "OnTruePositiveTest()": "Pass",
+        "OnTrueNegativeTest()": "Pass",
+        "hierarchyOffTest()": "Pass",
+        "hierarchyOnTest()": "Pass",
+        "directTest()": "Pass",
+        "OffTruePositiveTest()": "Pass",
+        "OffTrueNegativeTest()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.MaxBramCascadeHeightTest": {
+        "trueNegativeTest()": "Pass",
+        "truePositive0Test()": "Pass",
+        "truePositive5Test()": "Pass",
+        "truePositiveMaxTest()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.MaxBramTest": {
+        "truePositive0Test()": "Pass",
+        "directTest()": "Pass",
+        "trueNegative0Test()": "Pass",
+        "truePositiveMaxTest()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.MaxDspTest": {
+        "truePositive0Test()": "Pass",
+        "directTest()": "Pass",
+        "trueNegative0Test()": "Pass",
+        "truePositiveMaxTest()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.MaxUramCascadeHeightTest": {
+        "trueNegativeTest()": "Pass",
+        "truePositive0Test()": "Pass",
+        "truePositive5Test()": "Pass",
+        "truePositiveMaxTest()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.MaxUramTest": {
+        "trueNegative0FailTest()": "Pass",
+        "trueNegative5Test()": "Pass",
+        "truePositive0SuccessTest()": "Pass",
+        "truePositiveMaxTest()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.NoLcTest": {
+        "OnTruePositiveTest()": "Pass",
+        "OnTrueNegativeTest()": "Pass",
+        "OffTruePositiveTest()": "Pass",
+        "OffTrueNegativeTest()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.NoSrlExtractTest": {
+        "OnTruePositiveTest()": "Pass",
+        "OnTrueNegativeTest()": "Pass",
+        "OffTruePositiveTest()": "Pass",
+        "OffTrueNegativeTest()": "Pass",
+        "directInstantiationTest()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.design.ShregMinSizeTest": {
+        "size3Chain2TruePositiveTest()": "Pass",
+        "size5Chain4TrueNegativeTest()": "Pass",
+        "hierarchyTest()": "Pass",
+        "size1Chain2TrueNegativeTest()": "Pass",
+        "size3Chain4TruePositiveTest()": "Pass"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.canary.NoLcCanaryTest": {
+        "onNoLUTCombiningTruePositiveTest()": "Error: java.io.FileNotFoundException",
+        "offNoLUTCombiningTruePositiveTest()": "Error: java.io.FileNotFoundException"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.canary.KeepEquivRegsCanaryTest": {
+        "onKeepEquivalentRegsTruePositiveTest()": "Error: java.io.FileNotFoundException",
+        "offKeepEquivalentRegsTruePositiveTest()": "Error: java.io.FileNotFoundException"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.canary.GatedClockConversionCanaryTest": {
+        "onGatedClockConversionPositiveTest()": "Error: java.io.FileNotFoundException",
+        "offGatedClockConversionPositiveTest()": "Error: java.io.FileNotFoundException",
+        "autoGatedClockConversionPositiveTest()": "Error: java.io.FileNotFoundException"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.canary.ControlSetOptThresholdCanaryTest": {
+        "threshold16Test()": "Error: java.io.FileNotFoundException",
+        "threshold0Test()": "Error: java.io.FileNotFoundException",
+        "threshold7Test()": "Error: java.io.FileNotFoundException"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.canary.FlattenHierarchyCanaryTest": {
+        "noneFlattenHierarchyPositiveTest()": "Error: java.io.FileNotFoundException",
+        "fullFlattenHierarchyPositiveTest()": "Error: java.io.FileNotFoundException",
+        "rebuiltFlattenHierarchyPositiveTest()": "Error: java.io.FileNotFoundException"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.canary.FsmExtractionCanaryTest": {
+        "johnsonFSMextractPositiveTest()": "Error: java.io.FileNotFoundException",
+        "grayFSMextractPositiveTest()": "Error: java.io.FileNotFoundException",
+        "offFSMextractPositiveTest()": "Error: java.io.FileNotFoundException",
+        "onehotFSMextractPositiveTest()": "Error: java.io.FileNotFoundException",
+        "autoFSMextractPositiveTest()": "Error: java.io.FileNotFoundException",
+        "sequentialFSMextractPositiveTest()": "Error: java.io.FileNotFoundException"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.canary.ResourceSharingCanaryTest": {
+        "autoResourceSharingPositiveTest()": "Error: java.io.FileNotFoundException",
+        "onResourceSharingPositiveTest()": "Error: java.io.FileNotFoundException",
+        "offResourceSharingPositiveTest()": "Error: java.io.FileNotFoundException"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.canary.NoSrlExtractCanaryTest": {
+        "onNoLUTCombiningTruePositiveTest()": "Error: java.io.FileNotFoundException",
+        "offNoLUTCombiningTruePositiveTest()": "Error: java.io.FileNotFoundException"
+    },
+    "edu.gtri.cosmic_canary.options.synthesis.canary.ShregMinSizeCanaryTest": {
+        "shregMinSize3PositiveTest()": "Error: java.io.FileNotFoundException"
+    }
+}

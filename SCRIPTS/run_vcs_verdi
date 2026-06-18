@@ -1,0 +1,48 @@
+#!/bin/bash -x
+#
+# libraries - altera simulation library generated from quartus run
+# synopsys_sim.setup - vcs simulation setup file
+#
+# Finally, I have successfully compile and run on "rancor" with "L-2016.06-SP1"
+# 1. compile/link on "yoda" which will have error with 
+# 2. re-run again on "rancor" which link to proper object to fix the issue
+# 3. We can also run "dve" on host "rancor" for debug
+#
+export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+#export VCS_HOME=/export/tools/synopsys/L-2016.06-SP1
+export PATH=$VCS_HOME/bin:$PATH
+#
+mkdir -p libraries/vhdl_libs/work
+rm -rf libraries/vhdl_libs/work/*
+#export VCS_ARCH_OVERRIDE=amd64
+#export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
+#
+REPO_DIR=/nas/home/tsung/CODE/BRAM_CIFT
+WORKDIR=/nas/home/tsung/VCS_SIM_CIFT
+CIFT_PLUGINS=$REPO_DIR/installations/full/python/lib/python3.9/site-packages
+#
+vhdlan -full64 -work work  \
+$WORKDIR/bram_constants.vhd \
+$CIFT_PLUGINS/cift_intel/build/stratix10/hdl/bram/quad_port_bram.vhd \
+$CIFT_PLUGINS/cift_intel/build/stratix10/hdl/bram/intel_tpg_constants_pkg.vhd \
+$WORKDIR/bram_facade.vhd \
+$WORKDIR/march_constants_pkg.vhd \
+$CIFT_PLUGINS/cift/builders/bram/single_port/hdl/march_generic_pkg.vhd \
+$CIFT_PLUGINS/cift/builders/bram/single_port/hdl/marchx_pkg.vhd \
+$CIFT_PLUGINS/cift/builders/bram/single_port/hdl/march_generic.vhd \
+$WORKDIR/tpg_converter.vhd \
+$WORKDIR/sp2sdp_tpg.vhd \
+$WORKDIR/dp2qp_converter.vhd \
+$CIFT_PLUGINS/cift/builders/bram/hdl/ora.vhd \
+$CIFT_PLUGINS/cift/builders/bram/hdl/capture.vhd \
+$WORKDIR/test_arch.vhd \
+$CIFT_PLUGINS/cift/builders/bram/hdl/harness.vhd \
+$REPO_DIR/installations/full/interfaces/stratix10/vjtag/io_wrapper.vhd
+#
+vcs -full64 -debug_access+all -lca -t ps top_level
+#
+#./simv -gui
+#./simv -ucli 
+#./simv +vcs+finish+100
+#
+#vcs -sverilog -timescale=1ns/1ns -ntb_opts uvm-1.0+rvm +incdir+../sv xbus_tb_top.sv -l comp.log -debug_access+pp  +define+UVM_ON_TOP

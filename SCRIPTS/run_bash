@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+IFT_XILINX_TOOLS=/export/tools/xilinx/14.7
+QA_HOME=~/IFT_QA/today/ift-internal
+rm ~/.local/share/ISI_IFT/config
+#
+cd $QA_HOME 
+#./install.sh
+#
+python/bin/python application/ift.py --batch $1 
+

@@ -1,0 +1,15 @@
+#!/usr/bin/bash -x
+#
+python3.9 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+pip install cift-2.4.0-py3-none-any.whl plugins/cift_ise*.whl plugins/cift_xilinx*.whl plugins/pyxdl*.whl
+#
+export CI_PROJECT_DIR=~/CODE/cift-internal
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu
+export CIFT_SETTINGS_FILE=test/qa/settings.toml
+export CIFT_INSTALL_ROOT_TEST=${CI_PROJECT_DIR}
+export CIFT_LOGGING_LEVEL=DEBUG
+python -V
+echo $PWD
+python -m xmlrunner -o=reports discover -s code/plugins/xilinx-ise/build/test/python 

@@ -1,0 +1,50 @@
+{
+    "lut_combining_wrapper_on.synth.dcp": {
+        "test": "lut_combining_wrapper_on",
+        "result": "RESULT/lut_combining_wrapper_on.report",
+        "resource": {
+            "luts": "  725 ",
+            "regs": "   38 ",
+            "carry8": "    0 ",
+            "dsps": "    0 ",
+            "iob": "  280 ",
+            "c_buf": "    1 "
+        }
+    },
+    "equivalent_regs_wrapper_on.synth.dcp": {
+        "test": "equivalent_regs_wrapper_on",
+        "result": "RESULT/equivalent_regs_wrapper_on.report",
+        "resource": {
+            "luts": "    0 ",
+            "regs": "    2 ",
+            "carry8": "    0 ",
+            "dsps": "    0 ",
+            "iob": "    4 ",
+            "c_buf": "    1 "
+        }
+    },
+    "equivalent_regs_off.synth.dcp": {
+        "test": "equivalent_regs_off",
+        "result": "RESULT/equivalent_regs_off.report",
+        "resource": {
+            "luts": "    0 ",
+            "regs": "    1 ",
+            "carry8": "    0 ",
+            "dsps": "    0 ",
+            "iob": "    0 ",
+            "c_buf": "    0 "
+        }
+    },
+    "lut_combining_off.synth.dcp": {
+        "test": "lut_combining_off",
+        "result": "RESULT/lut_combining_off.report",
+        "resource": {
+            "luts": "  579 ",
+            "regs": "   38 ",
+            "carry8": "    0 ",
+            "dsps": "    0 ",
+            "iob": "    0 ",
+            "c_buf": "    0 "
+        }
+    }
+}

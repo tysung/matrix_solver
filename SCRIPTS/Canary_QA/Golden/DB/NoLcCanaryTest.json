@@ -1,0 +1,29 @@
+{
+    "X_date": [
+        "01-28-2021",
+        "01-07-2021",
+        "01-06-2021",
+        "01-08-2021",
+        "01-15-2021"
+    ],
+    "Y_name": [
+        "offNoLUTCombiningTruePositiveTest()",
+        "onNoLUTCombiningTruePositiveTest()"
+    ],
+    "Cells": {
+        "offNoLUTCombiningTruePositiveTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Error: java.io.FileNotFoundException",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Error: java.io.FileNotFoundException"
+        },
+        "onNoLUTCombiningTruePositiveTest()": {
+            "01-06-2021": "Pass",
+            "01-07-2021": "Error: java.io.FileNotFoundException",
+            "01-08-2021": "Pass",
+            "01-15-2021": "Pass",
+            "01-28-2021": "Error: java.io.FileNotFoundException"
+        }
+    }
+}

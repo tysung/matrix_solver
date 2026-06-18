@@ -1,0 +1,8 @@
+#!/bin/bash -x
+#. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+export PATH=/opt/intel/quartus/21.4/quartus/bin:$PATH
+#
+quartus_sh --simlib_comp -family all -tool vcsmx -tool_path /export/tools/synopsys/L-2016.06-SP1/bin -language vhdl -directory ./XXX -log LOG.compile -cmd_file xxx_cmd.compile
+#
+#quartus_sh --help=simlib_comp

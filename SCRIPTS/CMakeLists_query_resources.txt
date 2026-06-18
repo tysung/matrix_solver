@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 3.12)
+set(CMAKE_CXX_STANDARD 17)
+project(cift_build_exe)
+
+##### Modify the following lines #####
+
+set(USER_EXE query_resources)
+set(USER_FILES query_resources.cpp)
+set(BOOST_DEP program_options)
+set(TORC_STATIC 'torc_static')
+set(ZLIB 'z')
+#set(TORC_STATIC '/nas/home/tsung/CODE/torc-internal_March2023/lib/libtorc_static.a')
+#set(ZLIB '/usr/lib/x86_64-linux-gnu/libz.so')
+
+
+##### Do not touch below #####
+
+# Reference to torc
+#add_subdirectory(torc)
+
+# Specify the executable
+add_executable(${USER_EXE} ${USER_FILES})
+
+target_include_directories(${USER_EXE} PUBLIC ${TORC_ROOT}/include)
+
+# Link to the BOOST dependencies
+find_package(Boost COMPONENTS regex ${BOOST_DEP} REQUIRED)
+target_link_libraries(${USER_EXE} ${Boost_LIBRARIES})
+
+# Link to the torc library
+#
+add_library(torc_static SHARED IMPORTED)
+
+find_library(TORC_LIBRARY_PATH torc_static HINTS ${TORC_ROOT}/lib)
+set_target_properties(torc_static PROPERTIES IMPORTED_LOCATION "${TORC_LIBRARY_PATH}")
+#target_include_directories(torc_static INTERFACE ${TORC_ROOT}/include)
+#
+#find_package(Torc CONFIG REQUIRED HINTS ${TORC_ROOT})
+#target_link_libraries(${USER_EXE} torc)
+target_link_libraries(${USER_EXE} torc_static ${ZLIB}) # for static libraries

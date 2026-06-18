@@ -1,0 +1,11 @@
+#!/usr/bin/bash -x
+cd ~/CODE/torc-internal_ice40
+#cd /media/torc-internal_ice40
+rm -rf build
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/opt/torc/ice40 -DCMAKE_BUILD_TYPE=Release ..
+#cmake -DCMAKE_INSTALL_PREFIX=<path> -DBOOST_ROOT=<Boost> -DCMAKE_BUILD_TYPE=[Release|Debug] ..
+make -j8 torc_static torc_shared
+#make install
+

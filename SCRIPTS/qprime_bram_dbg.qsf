@@ -1,0 +1,17 @@
+set_global_assignment -name TOP_LEVEL_ENTITY top_level
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 21.4.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "23:50:30  MAY 17, 2022"
+set_global_assignment -name LAST_QUARTUS_VERSION "21.4.0 Pro Edition"
+set_global_assignment -name FAMILY "Stratix 10"
+set_global_assignment -name IP_FILE IP_Reset_Release.ip
+set_global_assignment -name VHDL_FILE "/nas/home/tsung/CODE/stratix_cift-internal/work/marchx_s10_bram_debug/bram_constants.vhd"
+set_global_assignment -name VHDL_FILE /nas/home/tsung/ALTERA_STRATIX/TPG_BRAM/shared_clock_tdp_ram_simple.vhd
+set_global_assignment -name IP_FILE DUAL_PORT_BRAM.ip
+set_global_assignment -name VHDL_FILE "/nas/home/tsung/CODE/stratix_cift-internal/installations/cift/python/lib/python3.9/site-packages/cift_builders/bram/single_port/hdl/march_x.vhd"
+set_global_assignment -name VHDL_FILE "/nas/home/tsung/CODE/stratix_cift-internal/work/marchx_s10_bram_debug/sp2dp_converter.vhd"
+set_global_assignment -name VHDL_FILE "/nas/home/tsung/CODE/stratix_cift-internal/work/marchx_s10_bram_debug/test_arch.vhd"
+set_global_assignment -name VHDL_FILE "/nas/home/tsung/CODE/stratix_cift-internal/installations/cift/python/lib/python3.9/site-packages/cift_builders/bram/hdl/ora.vhd"
+set_global_assignment -name VHDL_FILE "/nas/home/tsung/CODE/stratix_cift-internal/installations/cift/python/lib/python3.9/site-packages/cift_builders/bram/hdl/capture.vhd"
+set_global_assignment -name VHDL_FILE /nas/home/tsung/ALTERA_STRATIX/TPG_BRAM/harness.vhd
+set_global_assignment -name VHDL_FILE "/nas/home/tsung/CODE/stratix_cift-internal/installations/cift/interfaces/vjtag_stratix10/io_wrapper.vhd"
+set_global_assignment -name DEVICE 1SG280LN2F43E1VG

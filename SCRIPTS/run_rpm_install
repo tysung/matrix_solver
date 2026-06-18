@@ -1,0 +1,4 @@
+#!/bin/bash
+#
+rpm -Uvh --nodeps --prefix /projects/cift/lattice diamond_3_12-base-240-2-x86_64-linux.rpm
+

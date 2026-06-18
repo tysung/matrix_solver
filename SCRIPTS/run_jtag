@@ -1,0 +1,46 @@
+#!/bin/bash -x
+#. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu
+export PATH=/nas/home/tsung/intelFPGA_pro/24.3/quartus/bin:$PATH
+#export PATH=/opt/intel/quartus/21.4/quartus/bin:$PATH
+#
+#
+quartus_pgm -c "AGF FPGA Development Kit [1-13.2.5]" -m jtag -o "p;/nas/home/tsung/CODE/cift-travis/workspace/tests/agilex 7/agfb014r24a3e3v/harness-iopin/iopin_test-0.sof@1"
+#quartus_pgm -c "AGF FPGA Development Kit [1-13.2.5]" -m jtag -o "p;/nas/home/tsung/CODE/cift-travis/workspace/tests/agilex 7/agfb014r24a3e3v/bram-marchb_2kx10_tdp/marchb_2kx10_tdp-00000.sof@1"
+#
+#quartus_stp -help
+quartus_stp -s
+#
+#DEVICE_LOCK_TIMEOUT_MS = 1000
+#INSTANCE_INDEX = 0
+#ADDRESS_DONE = 0x1
+#ADDRESS_PASS = 0x2
+#
+#lappend auto_path {/nas/home/tsung/CODE/cift-travis/venv/lib/python3.9/site-packages/cift_intel/qprime/PyQuartus/tcl}
+#package require ::cift::io
+#info patchlevel
+#
+#open_device -hardware_name {AGF FPGA Development Kit [1-13.2.5]} -device_name {@1: AGFB014R24A(.|R1|R2)/.. (0xC341A0DD)}
+#device_lock -timeout 1000
+#device_ir_shift -ir_value 6 -no_captured_ir_value
+#puts "IDCODE: 0x[device_dr_shift -length 32 -value_in_hex]"
+#
+# choosing AA as DR value to reduce chance of false positive if it is forwarded
+#device_virtual_dr_shift -dr_value AA -instance_index 0 -length 8 -value_in_hex
+# response.result
+#device_virtual_ir_shift -instance_index {INSTANCE_INDEX} -ir_value {ADDRESS_DONE}
+#
+#device_virtual_dr_shift -dr_value AA -instance_index {INSTANCE_INDEX} -length 8 -value_in_hex
+#
+#device_unlock 
+#close_device
+#
+#quartus_stp --tcl_eval get_device_names -hardware_name {AGF FPGA Development Kit [1-13.2.5]}
+#
+#quartus --64bit &
+#quartus_sh -g  lab &
+#
+#quartus_sh -t setup_proj.tcl
+#quartus_sh --flow compile lab 
+#

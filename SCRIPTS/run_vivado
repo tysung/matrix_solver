@@ -1,0 +1,19 @@
+#!/bin/bash
+. /nas/projects/FPGA_tools/tools/linux/xilinx/2025.1/Vivado/settings64.sh
+#. /nas/projects/FPGA_tools/tools/linux/xilinx/Vivado/2024.2/settings64.sh
+#. /opt/xilinx/Vivado/2022.1/settings64.sh
+#
+# vivado -mode gui 
+# vivado -mode tcl
+# vivado -mode batch -source Your_SCRIPT.tcl
+# link_design -part xc7s25csga324-1
+# link_design -part xc7s100fgga676-1
+# link_design -part xczu3eg-sfva625-1-e
+# --- trouble to part is not specified !!!
+# open_checkpoint $prj_out/_ROUTED.dcp
+#
+cd /nas/home/tsung/CODE/cift-internal_042026/vivado_workspace/work/ultra_mux2
+#rm -rf project_3
+#vivado -mode batch -source mux2_vivado_sim.tcl
+vivado -mode gui &
+

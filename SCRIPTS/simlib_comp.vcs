@@ -1,0 +1,21 @@
++cli+1 -line -timescale=1ps/1ps -sverilog +verilog2001ext+.v \
+-v /opt/intel/quartus/21.4/quartus/eda/sim_lib/altera_primitives.v \
+-v /opt/intel/quartus/21.4/quartus/eda/sim_lib/220model.v \
+-v /opt/intel/quartus/21.4/quartus/eda/sim_lib/sgate.v \
+-v /opt/intel/quartus/21.4/quartus/eda/sim_lib/altera_mf.v \
+-lca \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/altera_lnsim.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/fourteennm_atoms.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/synopsys/fourteennm_atoms_ncrypt.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/ct1_hssi_atoms.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/ct1_hssi_atoms_ncrypt.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/synopsys/cr3v0_serdes_models_ncrypt.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/ct1_hip_atoms.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/ct1_hip_atoms_ncrypt.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/ctp_hssi_atoms.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/ctp_hssi_atoms_ncrypt.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/cta_hssi_atoms.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/cta_hssi_atoms_ncrypt.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/ctab_hssi_atoms.sv \
+ /opt/intel/quartus/21.4/quartus/eda/sim_lib/ctab_hssi_atoms_ncrypt.sv \
+ +incdir+/opt/intel/quartus/21.4/quartus/eda/sim_lib \

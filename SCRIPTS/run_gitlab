@@ -1,0 +1,23 @@
+#!/bin/bash -x
+# this example YAML file
+# this is ci_cd branch test
+#
+cd ~/FASM2BELS
+export XRAY_VIVADO_SETTINGS=/export/tools/xilinx/Vivado/2018.3/settings64.sh
+#
+#rm -rf prjxray 
+#git clone https://github.com/SymbiFlow/prjxray.git
+#
+cd prjxray
+#
+git submodule update --init --recursive
+make build
+make env
+make db-prepare-kintex7
+source settings/kintex7.sh
+#
+cd cicd-test
+$XRAY_BIT2FASM XADC_TEST.bit |& tee ./XADC_TEST.fasm
+#
+echo "Done Prjxray"
+#

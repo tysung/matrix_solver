@@ -1,0 +1,7 @@
+#!/usr/bin/bash -x
+#
+cd ~/CODE/torc-internal/devices/build
+#
+perl -I . xdlrc.pl preprocess custom:ice40:ice40lp1k
+perl -I . xdlrc.pl process    custom:ice40:ice40lp1k
+

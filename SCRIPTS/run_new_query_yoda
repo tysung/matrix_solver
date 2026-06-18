@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+export LD_LIBRARY_PATH=/opt/torc/latest/lib/:/lib/x86_64-linux-gnu
+#
+cd /projects/cift/installs/updated-pattern/python/lib64/python3.9/site-packages/cift_xilinx/ise/bin
+#
+./query_resources --torc=/nas/home/tsung/CODE/torc-internal xc7k70tfbg484
+./query_resources --torc=/nas/home/tsung/CODE/torc-internal xc7z030sbg485

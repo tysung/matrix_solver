@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+cd /nas/home/tsung/CODE/Vivado_HLS/examples/design/FIR/fir_3stage
+#
+/export/tools/xilinx/Vivado_HLS/2017.2/bin/vivado_hls -f run_hls.tcl 
+

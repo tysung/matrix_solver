@@ -1,0 +1,5 @@
+#!/bin/bash
+. /export/tools/xilinx/14.7/ISE_DS/settings64.sh
+#
+netgen -w -aka -sim -ofmt vhdl -intstyle ise -mhf -pcf harness_placed.pcf -tb -mhf luts1-2.ncd
+

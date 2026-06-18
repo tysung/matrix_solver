@@ -1,0 +1,13 @@
+#!/usr/bin/bash -x
+#cd /nas/home/tsung/Trebuchet/trebuchet-ip/cores/multitile/palladium/tss_repo/palladium_multitile/duality_trebuchet_multitile/sim
+#
+export PATH=$PATH:/export/tools/cadence/XCELIUM2103/tools/bin
+export PATH=$PATH:/projects/tools/cadence/installs/VXE2102/bin
+export PATH=$PATH:/projects/tools/cadence/installs/IXCOM2107/bin
+export PATH=$PATH:/projects/tools/cadence/installs/HDLICE2107/bin
+export LM_LICENSE_FILE=1727@rcg-lic.ads.isi.edu:2100@rcg-lic.ads.isi.edu:3000@rcg-lic.ads.isi.edu:2700@rcg-lic.ads.isi.edu:5280@rcg-lic.ads.isi.edu:5480@rancor.ads.isi.edu:5285@yoda.ads.isi.edu
+#
+simvision -64 ./duality_trebuchet_multitile.shm
+#virtuoso &
+
+

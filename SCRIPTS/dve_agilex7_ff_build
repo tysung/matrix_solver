@@ -1,0 +1,165 @@
+#!/bin/bash -x
+#
+# Compile Altera Max10 devices VHDL Lib using VCS simulator
+#
+#
+#export QUARTUS_INSTALL_DIR=/nas/projects/FPGA_tools/tools/linux/altera/23.1_std/quartus
+export QUARTUS_INSTALL_DIR=/nas/projects/FPGA_tools/tools/linux/altera/24.3_pro/24.3/quartus
+#export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+export VCS_HOME=/nas/projects/edaTools/synopsys/vcs/W-2024.09-SP2
+#export VERDI_HOME=/export/tools/synopsys/vc_static/R-2020.12/verdi
+export VERDI_HOME=/nas/projects/edaTools/synopsys/verdi/X-2025.06
+export PATH=$VCS_HOME/bin:$PATH
+export PATH=$QUARTUS_INSTALL_DIR/bin:$PATH
+export LM_LICENSE_FILE=3000@rcg-lic.ads.isi.edu
+#
+#export DVE_HOME=/export/tools/synopsys/vc_static/R-2020.12/vcs-mx
+#export PATH=$DVE_HOME/bin:$PATH
+#
+#dve -full64 &
+
+#
+WORKDIR=/nas/home/tsung/MAX10_VCS_BRAM
+RTLDIR=$WORKDIR/agilex7_ff/files
+LIBDIR=$WORKDIR/libraries
+#
+# compile verdi flag - '-kdb -full64'
+DBG='-full64'
+# run with "-verdi" flag
+RUN_DBG='-gui=dve'
+#
+#export VCS_ARCH_OVERRIDE=linux64
+#
+SKIP_DEV_COM=0
+SKIP_COM=0
+SKIP_ELAB=0
+SKIP_SIM=0
+#
+#which vhdlan
+#quartus_sh --help=simlib_comp
+#exit
+#
+# ----------------------------------------
+# overwrite variables - DO NOT MODIFY!
+# This block evaluates each command line argument, typically used for 
+# overwriting variables. An example usage:
+#   ./run_vcs_lib SKIP_DEV_COM=0 SKIP_COME=0 SKIP_ELAB=0 SKIP_SIM=1
+#
+for expression in "$@"; do
+  eval $expression
+  if [ $? -ne 0 ]; then
+    echo "Error: This command line argument, \"$expression\", is/has an invalid expression." >&2
+    exit $?
+  fi
+done
+#
+# Generating VCS simulation models for VHDL Lib for ALL(inc Fourteennm) devices defined in Quartus Prime
+# compile device library files
+cd $WORKDIR
+if [ $SKIP_DEV_COM -eq 0 ]; then
+  rm -rf $LIBDIR 
+  mkdir -p $LIBDIR 
+  #rm -rf $LIBDIR/../libraries
+  # default command didn't compile with -full64 which is a problem
+  #
+  #quartus_sh --simlib_comp -family all -tool vcsmx -tool_path $VCS_HOME/bin -language vhdl -directory ./libraries_yoda_23.1 -log LOG.compile -cmd_file quartus_compile_lib.cmd
+  #
+  #exit
+  #
+rm -rf libraries/vhdl_libs/altera/*
+rm -rf libraries/vhdl_libs/lpm/*
+rm -rf libraries/vhdl_libs/sgate/*
+rm -rf libraries/vhdl_libs/altera_mf/*
+rm -rf libraries/vhdl_libs/altera_lnsim/*
+rm -rf libraries/vhdl_libs/fiftyfivenm/*
+#rm -rf libraries/vhdl_libs/tennm/*
+  #
+mkdir -p $LIBDIR/vhdl_libs/altera
+mkdir -p $LIBDIR/vhdl_libs/lpm
+mkdir -p $LIBDIR/vhdl_libs/sgate
+mkdir -p $LIBDIR/vhdl_libs/altera_mf
+mkdir -p $LIBDIR/vhdl_libs/altera_lnsim
+mkdir -p $LIBDIR/vhdl_libs/fiftyfivenm  
+#mkdir -p $LIBDIR/vhdl_libs/tennm
+  #
+vhdlan $DBG -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_syn_attributes.vhd 
+vhdlan $DBG -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_standard_functions.vhd 
+vhdlan $DBG -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/alt_dspbuilder_package.vhd 
+vhdlan $DBG -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_europa_support_lib.vhd 
+vhdlan $DBG -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives_components.vhd 
+vhdlan $DBG -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives.vhd
+  #
+vhdlan $DBG -nc -work lpm $QUARTUS_INSTALL_DIR/eda/sim_lib/220pack.vhd 
+vhdlan $DBG -nc -work lpm $QUARTUS_INSTALL_DIR/eda/sim_lib/220model.vhd
+  #
+vhdlan $DBG -nc -work sgate $QUARTUS_INSTALL_DIR/eda/sim_lib/sgate_pack.vhd 
+vhdlan $DBG -nc -work sgate $QUARTUS_INSTALL_DIR/eda/sim_lib/sgate.vhd
+  #
+vhdlan $DBG -nc -work altera_mf $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_mf_components.vhd       
+vhdlan $DBG -nc -work altera_mf $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_mf.vhd
+# added clock IP simulation model - synthesis model can't be simulated
+#vlogan -nc -work altera_mf +v2k $WORKDIR/altera_config_clock_source_endpoint.v
+  #
+vlogan $DBG -nc -work altera_lnsim -sverilog $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_lnsim.sv 
+vhdlan $DBG -nc -work altera_lnsim $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_lnsim_components.vhd  
+  #
+vlogan $DBG -sverilog -nc -work tennm $QUARTUS_INSTALL_DIR/eda/sim_lib/synopsys/tennm_atoms_ncrypt.sv 
+vhdlan $DBG -nc -work tennm $QUARTUS_INSTALL_DIR/eda/sim_lib/tennm_atoms.vhd 
+vhdlan $DBG -nc -work tennm $QUARTUS_INSTALL_DIR/eda/sim_lib/tennm_components.vhd 
+  #
+#vlogan $DBG +v2k5 -nc -work fiftyfivenm $QUARTUS_INSTALL_DIR/eda/sim_lib/synopsys/fiftyfivenm_atoms_ncrypt.v 
+#vhdlan $DBG -nc -work fiftyfivenm $QUARTUS_INSTALL_DIR/eda/sim_lib/fiftyfivenm_atoms.vhd 
+#vhdlan $DBG -nc -work fiftyfivenm $QUARTUS_INSTALL_DIR/eda/sim_lib/fiftyfivenm_components.vhd 
+  #
+  #exit
+  #
+fi
+#
+# now, compile our VHDL code with the Altera VHDL lib defined in synopsys_sim.setup file
+#
+export PATH=$VCS_HOME/bin:$PATH
+#
+# define CIFT VHDL code to be compiled
+#
+if [ $SKIP_COM -eq 0 ]; then
+  cd $WORKDIR
+  rm -rf simv simv.daidir csrc
+  rm -rf $LIBDIR/vhdl_libs/work
+  mkdir -p $LIBDIR/vhdl_libs/work
+  #mkdir -p $LIBDIR/vhdl_libs/work/64
+  #
+vhdlan $DBG -work work  \
+$RTLDIR/constants_pkg.vhd \
+$RTLDIR/lab_ff.vhd \
+$RTLDIR/plb.vhd \
+$RTLDIR/gold.vhd \
+$RTLDIR/register_tpg_flex.vhd \
+$RTLDIR/ora.vhd \
+$RTLDIR/test_gen.vhd \
+$RTLDIR/capture_small.vhd \
+$RTLDIR/harness.vhd
+#
+vhdlan $DBG -work work  \
+$WORKDIR/testbench.vhd 
+#
+#vlogan $DBG -work work  \
+#$RTLDIR/max10-iowrapper-50MHz.v 
+fi
+#
+#
+if [ $SKIP_ELAB -eq 0 ]; then
+  #vcs $DBG -lca -l comp.log -t ps testbench
+  vcs $DBG -debug_all -lca -l comp.log -t ps testbench 
+  #vcs $DBG -debug_access+all -lca -l comp.log -t ps testbench 
+  #vcs -full64 -lca -t ps top_level
+fi
+# ----------------------------------------
+# simulate
+if [ $SKIP_SIM -eq 0 ]; then
+  ./simv $RUN_DBG & 
+  #./simv +vcs+finish+100000000
+  #./simv $RUN_DBG & 
+  #./simv -gui & 
+fi
+#
+#vcs -sverilog -timescale=1ns/1ns -ntb_opts uvm-1.0+rvm +incdir+../sv xbus_tb_top.sv -l comp.log -debug_access+pp  +define+UVM_ON_TOP

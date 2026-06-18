@@ -1,0 +1,47 @@
+## Xcelium
+#GUI=-gui
+
+current_dir := $(shell pwd)
+#
+export VCS_HOME := /opt/synopsys/vcs/S-2021.09-1
+export PATH := $(VCS_HOME)/bin:$(PATH)
+export LM_LICENSE_FILE := 3000@rcg-lic.ads.isi.edu
+#export VERDI_HOME=/export/tools/synopsys/vc_static/R-2020.12/verdi
+export PATH := $(shell pwd)/bin:$(PATH)
+#
+repodir := /nas/home/tsung/CODE/cift-internal_05_2024
+workdir := $(repodir)/workspace/plb_regtest1/files
+package := $(repodir)/venv/lib/python3.9/site-packages
+#
+# retrieve VHDL files from $workdir
+#
+#DIRS = $(workdir) 
+#SEARCH_VHD = $(addsuffix /*.vhd, $(DIRS))
+#RTL_FILES = $(wildcard $(SEARCH_VHD))
+#
+RTL_FILES = \
+		$(workdir)/constants_pkg.vhd \
+		$(workdir)/slice_reg1.vhd \
+		$(workdir)/plb.vhd \
+		$(workdir)/gold.vhd \
+		$(workdir)/regtest1_tpg_3_1.vhd \
+		$(workdir)/ora.vhd \
+		$(workdir)/test_gen.vhd \
+		$(workdir)/capture_small.vhd \
+		$(workdir)/harness.vhd \
+		$(package)/cift_lattice/ice40/hdl/testbench.vhd
+
+run:
+	./simv -gui &
+
+compile: $(RTL_FILES)
+	vlogan -full64 -nc -work work -full64 +v2k $(workdir)/sb_ice_syn_new.v
+	vhdlan -full64 -work work $(RTL_FILES) 
+	vcs -full64 -debug_access+all -lca -t ps testbench	
+
+print-%:
+	echo $* = $($*)
+
+clean:
+	rm -rf 64 AN.DB DVEfiles verdiLog csrc simv.daidir simv work.lib++
+

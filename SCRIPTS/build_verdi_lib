@@ -1,0 +1,117 @@
+#!/bin/bash
+#
+# Compile Altera Stratix10 devices VHDL Lib using VCS simulator
+#
+#
+export QUARTUS_INSTALL_DIR=/opt/intel/quartus/21.4/quartus
+#export VCS_HOME=/export/tools/synopsys/M-2017.03-SP2
+#export VCS_HOME=/export/tools/synopsys/L-2016.06-SP1
+#export VCS_HOME=/export/tools/synopsys/vcs/Q-2020.03
+export VCS_HOME=/export/tools/synopsys/vc_static/R-2020.12/vcs-mx
+export PATH=$QUARTUS_INSTALL_DIR/bin:$PATH
+#
+REPO_DIR=/nas/home/tsung/CODE/BRAM_CIFT
+WORKDIR=/nas/home/tsung/VCS_SIM_CIFT
+LIBDIR=$WORKDIR/libraries_verdi_Q
+#
+SKIP_DEV_COM=0
+SKIP_COM=1
+SKIP_ELAB=1
+SKIP_SIM=1
+# ----------------------------------------
+# overwrite variables - DO NOT MODIFY!
+# This block evaluates each command line argument, typically used for 
+# overwriting variables. An example usage:
+#   ./run_vcs_lib SKIP_DEV_COM=0 SKIP_ELAB=0 SKIP_SIM=1
+#
+for expression in "$@"; do
+  eval $expression
+  if [ $? -ne 0 ]; then
+    echo "Error: This command line argument, \"$expression\", is/has an invalid expression." >&2
+    exit $?
+  fi
+done
+#
+# Generating VCS simulation models for VHDL Lib for ALL(inc Fourteennm) devices defined in Quartus Prime
+#
+# compile device library files
+if [ $SKIP_DEV_COM -eq 0 ]; then
+  cd $WORKDIR
+  rm -rf $LIBDIR 
+  mkdir -p $LIBDIR 
+  rm -rf $LIBDIR/../libraries
+  ln -s $LIBDIR ./libraries
+  # default command didn't compile with -full64 which is a problem
+  #quartus_sh --simlib_comp -family stratix10 -tool vcsmx -tool_path $VCS_HOME/bin -language vhdl -directory ./libraries -log LOG.compile -cmd_file quartus_compile_lib.cmd
+  #
+mkdir -p $LIBDIR/vhdl_libs/altera/
+mkdir -p $LIBDIR/vhdl_libs/lpm/
+mkdir -p $LIBDIR/vhdl_libs/sgate/
+mkdir -p $LIBDIR/vhdl_libs/altera_mf/
+mkdir -p $LIBDIR/vhdl_libs/altera_lnsim/
+mkdir -p $LIBDIR/vhdl_libs/fourteennm/  
+  #
+vhdlan -kdb -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_syn_attributes.vhd 
+vhdlan -kdb -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_standard_functions.vhd 
+vhdlan -kdb -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/alt_dspbuilder_package.vhd 
+vhdlan -kdb -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_europa_support_lib.vhd 
+vhdlan -kdb -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives_components.vhd 
+vhdlan -kdb -full64 -nc -work altera $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives.vhd
+  #
+vhdlan -kdb -full64 -nc -work lpm $QUARTUS_INSTALL_DIR/eda/sim_lib/220pack.vhd 
+vhdlan -kdb -full64 -nc -work lpm $QUARTUS_INSTALL_DIR/eda/sim_lib/220model.vhd
+  #
+vhdlan -kdb -full64 -nc -work sgate $QUARTUS_INSTALL_DIR/eda/sim_lib/sgate_pack.vhd 
+vhdlan -kdb -full64 -nc -work sgate $QUARTUS_INSTALL_DIR/eda/sim_lib/sgate.vhd
+  #
+vlogan  -kdb -full64 -nc -work altera_mf -full64 +v2k $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_mf.v
+#vhdlan -kdb -full64 -nc -work altera_mf $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_mf.vhd
+#vhdlan -kdb -full64 -nc -work altera_mf $QUARTUS_INSTALL_DIR/libraries/vhdl/altera_mf/altera_mf_components.vhd
+vhdlan -kdb -full64 -nc -work altera_mf $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_mf_components.vhd       
+# added clock IP simulation model - synthesis model can't be simulated
+vlogan -kdb -full64 -nc -work altera_mf -full64 +v2k $WORKDIR/altera_config_clock_source_endpoint.v
+  #
+vlogan -kdb -full64 -nc -work altera_lnsim -sverilog $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_lnsim.sv 
+vhdlan -kdb -full64 -nc -work altera_lnsim $QUARTUS_INSTALL_DIR/eda/sim_lib/altera_lnsim_components.vhd  
+  #
+vlogan -kdb -full64 -nc -work fourteennm -sverilog $QUARTUS_INSTALL_DIR/eda/sim_lib/synopsys/fourteennm_atoms_ncrypt.sv 
+vhdlan -kdb -full64 -nc -work fourteennm $QUARTUS_INSTALL_DIR/eda/sim_lib/fourteennm_atoms.vhd 
+vhdlan -kdb -full64 -nc -work fourteennm $QUARTUS_INSTALL_DIR/eda/sim_lib/fourteennm_components.vhd 
+  #
+fi
+#
+# now, compile our VHDL code with the Altera VHDL lib defined in synopsys_sim.setup file
+#
+export PATH=$VCS_HOME/bin:$PATH
+#
+# define CIFT VHDL code to be compiled
+#
+if [ $SKIP_COM -eq 0 ]; then
+  cd $WORKDIR
+  mkdir $LIBDIR/vhdl_libs/work
+  #
+  CIFT_PLUGINS=$REPO_DIR/installations/cift/python/lib/python3.9/site-packages
+  #
+  vhdlan -full64 -work work  $WORKDIR/constants_pkg.vhd \
+$CIFT_PLUGINS/cift_intel/stratix10/hdl/lab_luts1.vhd \
+$WORKDIR/plb.vhd \
+$WORKDIR/gold.vhd \
+$CIFT_PLUGINS/cift_builders/plb/hdl/results_lookup_tpg.vhd \
+$CIFT_PLUGINS/cift_builders/plb/hdl/ora.vhd \
+$WORKDIR/test_gen.vhd \
+$CIFT_PLUGINS/cift_builders/plb/hdl/capture_small.vhd \
+$CIFT_PLUGINS/cift_builders/plb/hdl/harness.vhd \
+$REPO_DIR/installations/cift/interfaces/vjtag_stratix10/io_wrapper.vhd
+fi
+#
+if [ $SKIP_ELAB -eq 0 ]; then
+  vcs -full64 -debug_access+all -lca -t ps top_level
+  #vcs -full64 -lca -t ps top_level
+fi
+# ----------------------------------------
+# simulate
+if [ $SKIP_SIM -eq 0 ]; then
+  ./simv +vcs+finish+100
+fi
+#
+#vcs -sverilog -timescale=1ns/1ns -ntb_opts uvm-1.0+rvm +incdir+../sv xbus_tb_top.sv -l comp.log -debug_access+pp  +define+UVM_ON_TOP
